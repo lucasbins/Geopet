@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "helpPet",
+    "slug": "helpPet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
