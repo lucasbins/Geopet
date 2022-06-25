@@ -7,7 +7,7 @@ import { primaryColor } from './src/config/stylesColors';
 import { LogBox } from 'react-native';
 
 import { Login } from './src/pages/login';
-import { NewUser } from './src/pages/newUser';
+import { NewUser } from './src/pages/login/newUser';
 import { Menu } from './src/pages/menu';
 import { Maps } from './src/pages/maps';
 import { Responsible } from './src/pages/responsible';
@@ -31,7 +31,11 @@ function App() {
         <Stack.Screen  
           name='NewUser'
           component={NewUser}
-          options={{ headerShown:false}}
+          options={{ 
+            title: "Novo Usuário", 
+            headerTintColor: primaryColor,
+            headerTitleAlign: "center",
+          }}
         />
         <Stack.Screen  
           name='Menu'

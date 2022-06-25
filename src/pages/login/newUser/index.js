@@ -10,7 +10,7 @@ import {
 import styles  from './style';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from '@firebase/app';
-import { firebaseConfig } from '../../config/firebaseconfig';
+import { firebaseConfig } from '../../../config/firebaseconfig';
 // import { Container } from './styles';
 
 export const NewUser = () => {
@@ -40,7 +40,7 @@ export const NewUser = () => {
       style={styles.container}>
 
       <Image style={styles.logo}
-        source={require('../../assets/img/Logo.png')}/>
+        source={require('../../../assets/img/Logo.png')}/>
 
       <TextInput
         style={styles.input}
