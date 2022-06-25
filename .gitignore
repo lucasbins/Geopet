@@ -37,6 +37,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+#APIS
+src/config/apiKey.js
+src/config/firebaseconfig.js
+
 # BUCK
 buck-out/
 \.buckd/
