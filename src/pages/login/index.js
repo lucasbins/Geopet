@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Text,
   View,
@@ -6,43 +6,27 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Keyboard
 } from 'react-native';
 import styles from './style';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from '@firebase/app';
-import { firebaseConfig } from '../../config/firebaseconfig';
-
+import AuthContext from '../../contexts/auth';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const [keyboardShow, setKeyboardShow] = useState(false);
 
-  keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
-  keyboardDidShowListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+  const auth = useContext(AuthContext)
 
-  function keyboardDidShow(){
-    setKeyboardShow(true);
-  }
-  function keyboardDidHide(){
-    setKeyboardShow(false);
-  }
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  const handleSignIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigation.navigate('Menu', {idUser: user.uid})
-      })
-      .catch((error) => {
-        console.log(error)
-        setError(true);
-      })
+  const handleSignIn = async () => {
+    try {
+      const signed = await auth.signIn(email, password)
+      if (signed)
+        navigation.navigate('Menu')
+      else
+        setError(true)
+    } catch(error) {
+      setError(true)
+    }
   }
 
   return (
@@ -50,12 +34,8 @@ export const Login = ({ navigation }) => {
       behavior={"height"}
       style={styles.background}>
       <View style={styles.containerLogo}>
-        {keyboardShow ? 
-          <Image style={styles.logo_icon}
-          source={require('../../assets/img/Logo_Icon.png')} />
-        : 
-        <Image style={styles.logo}
-          source={require('../../assets/img/Logo.png')} />}
+          <Image style={styles.logo}
+            source={require('../../assets/img/Logo.png')} />
       </View>
 
       <View style={styles.container}>
@@ -114,9 +94,7 @@ export const Login = ({ navigation }) => {
         >
           <Text style={styles.textButtonCreateAccount}>Create Account</Text>
         </TouchableOpacity>
-
       </View>
-
     </KeyboardAvoidingView>
   );
 }
