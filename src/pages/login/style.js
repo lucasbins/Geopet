@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   warningAlert: {
     color: 'red',
-  }
+  },
 });
 
 export default styles;

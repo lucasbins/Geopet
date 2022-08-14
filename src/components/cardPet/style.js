@@ -3,6 +3,7 @@ import { background, primaryColor, secondaryColor } from "../../config/stylesCol
 
 export const styles = StyleSheet.create({
   card:{
+    flex: 1,
     backgroundColor: '#fff',
     borderColor: primaryColor,
     borderWidth: 3,
@@ -12,25 +13,29 @@ export const styles = StyleSheet.create({
   },
   label:{
     color: primaryColor,
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 25,
   },
   text: {
     color: secondaryColor,
-    fontSize: 18,
+    fontSize: 25,
+    fontWeight: 'bold',
     marginBottom: 10,
     marginRight: 10,
+  },
+  name: {
+    flex: 1,
+    justifyContent: 'center'
   },
   line: {
     flex: 1,
     flexDirection: "row",
+    justifyContent: 'space-between'
   },
   imagePet:{
-    resizeMode: "contain",
-    width: 150 ,
-    height: 150,
-  },
-  avatar: {
-    flex: 1,
+    resizeMode: 'cover',
+    width: 100 ,
+    height: 100,
+    right: 10,
+    borderRadius: 100
   }
 })

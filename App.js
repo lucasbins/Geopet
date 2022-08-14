@@ -12,6 +12,7 @@ import { Responsible } from './src/pages/responsible';
 import { NewResponsible } from './src/pages/responsible/newResponsible';
 import { Pets } from './src/pages/pets';
 import { NewPets } from './src/pages/pets/newPets';
+import { DetalhesPets } from './src/pages/pets/detalhesPets';
 
 import { AuthProvider } from './src/contexts/auth';
 
@@ -69,10 +70,19 @@ function App() {
             }}
           />
           <Stack.Screen
-            name='newPets'
+            name='NewPets'
             component={NewPets}
             options={{
               title: "Novo Pet",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='DetalhesPets'
+            component={DetalhesPets}
+            options={{
+              title: "Detalhes",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}

@@ -1,0 +1,20 @@
+import React from 'react';
+import { View, TouchableOpacity, Image } from 'react-native';
+
+import { Container } from './styles';
+
+export const RowButtons = () => {
+  return (
+    <View style={Container.container}>
+      <TouchableOpacity style={Container.button}>
+        <Image style={Container.imageButton} source={require('../../assets/icons/Vacinas.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity style={Container.button}>
+        <Image style={Container.imageButton} source={require('../../assets/icons/Remedios.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity style={Container.button}>
+        <Image style={Container.imageButton} source={require('../../assets/icons/Parasita.png')} />
+      </TouchableOpacity>
+    </View>
+    );
+}

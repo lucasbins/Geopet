@@ -8,7 +8,7 @@ import { styles } from './style';
 import CardPet from '../../components/cardPet';
 import PlusButton from '../../components/plusButton';
 
-export const Pets = () => {
+export const Pets = ({navigation}) => {
   const [pets, setPets] = useState([])
   const auth = useContext(AuthContext)
 
@@ -21,14 +21,22 @@ export const Pets = () => {
     fetchPet(auth.user.user_uid)
   }, [])
 
+  const onPressNewPets = () => {
+    navigation.navigate('NewPets')
+  }
+
+  const onPressDetailsPets = (pet) => {
+    navigation.navigate('DetalhesPets', { pet: pet })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.list}>
         {pets !== undefined && pets.map((pet,i) => {
-          return <CardPet pet={pet} key={i}/>
+          return <CardPet pet={pet} key={i} change={onPressDetailsPets}/>
         })}
-        <PlusButton/>
+        <PlusButton change={onPressNewPets}/>
         </View>
       </ScrollView>
     </SafeAreaView>

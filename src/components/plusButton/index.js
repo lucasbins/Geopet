@@ -6,7 +6,8 @@ import { container } from './style';
 const PlusButton = (params) => {
   return (
     <TouchableOpacity style={container.center}
-      accessibilityLabel="Adicionar">
+      accessibilityLabel="Adicionar"
+      onPress={() => {params.change()}}>
       <Image
         style={container.button}
         source={require('../../assets/icons/Plus.png')}></Image>
