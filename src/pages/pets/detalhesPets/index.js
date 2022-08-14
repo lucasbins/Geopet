@@ -11,20 +11,20 @@ import { RowButtons } from '../../../components/rowButtons';
 
 import { container } from './styles';
 
-export const DetalhesPets = ({ route }) => {
+export const DetalhesPets = ({ navigation, route }) => {
   const pet = route.params.pet;
   return (
     <SafeAreaView style={container.container}>
       <ScrollView style={container.scrollView}>
         <View style={container.view}>
           <Text style={container.title}>{pet.nome}</Text>
-          <TouchableOpacity>
+          <View>
             {pet.avatar != '' ?
               <Image style={container.imagePet} source={{uri: pet.avatar}}/>
               :
               <Image style={container.imagePet} source={require('../../../assets/icons/PetAvatar.png')} />
             }
-          </TouchableOpacity>
+          </View>
           <View style={container.card}>
             <View style={container.line}>
               <Text style={container.label}>Peso: </Text>
@@ -56,7 +56,8 @@ export const DetalhesPets = ({ route }) => {
               <TouchableOpacity style={container.buttonRed}>
                 <Text style={container.textButton}>Deletar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={container.button}>
+              <TouchableOpacity style={container.button}
+                onPress={() => navigation.navigate('NewPets', {pet : pet , acao: 'edit'})}>
                 <Text style={container.textButton}>Editar</Text>
               </TouchableOpacity>
             </View>

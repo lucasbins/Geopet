@@ -2,7 +2,6 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { primaryColor } from './src/config/stylesColors';
-import { LogBox } from 'react-native';
 
 import { Login } from './src/pages/login';
 import { NewUser } from './src/pages/login/newUser';
