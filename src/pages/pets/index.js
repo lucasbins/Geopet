@@ -18,11 +18,12 @@ export const Pets = ({navigation}) => {
       const data = await api.getPets(uid)
       setPets(data)
     }
+    console.log('atualizou')
     fetchPet(auth.user.user_uid)
   }, [])
 
   const onPressNewPets = () => {
-    navigation.navigate('NewPets')
+    navigation.navigate('NewPets', {acao: 'new'})
   }
 
   const onPressDetailsPets = (pet) => {

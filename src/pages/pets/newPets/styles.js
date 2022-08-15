@@ -25,7 +25,8 @@ export const Container = StyleSheet.create({
     height: 40,
     borderBottomWidth: 1,
     borderBottomColor: primaryColor,
-    color: secondaryColor
+    color: secondaryColor,
+    textAlign: 'center'
   },
   label:{
     color: primaryColor,

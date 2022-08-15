@@ -18,7 +18,7 @@ const CardPet = (params) => {
         <View style={styles.avatar}>
           {pet.avatar != '' ? 
               <Image style={styles.imagePet}
-              source={{uri: pet.avatar}}/>
+              source={{ uri: 'data:image/jpeg;base64,' + pet.avatar}}/>
            :
               <Image style={styles.imagePet}
               source={require('../../assets/icons/PetAvatar.png')}/>

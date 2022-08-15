@@ -5,14 +5,24 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Alert,
   Image
 } from 'react-native';
 import { RowButtons } from '../../../components/rowButtons';
-
 import { container } from './styles';
+import { useApi } from '../../../hooks/useApi';
 
 export const DetalhesPets = ({ navigation, route }) => {
   const pet = route.params.pet;
+
+  const api = useApi()
+
+  const handleDelete = (uuid) => {
+    showAlert()
+    api.deletePet(uuid)
+    navigation.navigate("Pets", { atualizou : true})
+  }
+
   return (
     <SafeAreaView style={container.container}>
       <ScrollView style={container.scrollView}>
@@ -20,7 +30,7 @@ export const DetalhesPets = ({ navigation, route }) => {
           <Text style={container.title}>{pet.nome}</Text>
           <View>
             {pet.avatar != '' ?
-              <Image style={container.imagePet} source={{uri: pet.avatar}}/>
+              <Image style={container.imagePet} source={{ uri: 'data:image/jpeg;base64,' + pet.avatar}}/>
               :
               <Image style={container.imagePet} source={require('../../../assets/icons/PetAvatar.png')} />
             }
@@ -53,7 +63,10 @@ export const DetalhesPets = ({ navigation, route }) => {
           <View style={container.div}/>
           <View style={container.card}>
             <View style={container.rowButtons}>
-              <TouchableOpacity style={container.buttonRed}>
+              <TouchableOpacity 
+              style={container.buttonRed}
+              onPress={() => handleDelete(pet.uuid)}
+              >
                 <Text style={container.textButton}>Deletar</Text>
               </TouchableOpacity>
               <TouchableOpacity style={container.button}
@@ -78,4 +91,11 @@ const getIdade = (nasc) => {
 
 function calculaIdade(nascimento, hoje) {
   return Math.floor(Math.ceil(Math.abs(nascimento.getTime() - hoje.getTime()) / (1000 * 3600 * 24)) / 365.25);
+}
+
+const showAlert = () =>{
+  Alert.alert(
+    "Sucesso",
+    "Deletado!",
+  );
 }

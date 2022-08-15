@@ -1,7 +1,16 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from '@firebase/app';
 import { firebaseConfig } from '../config/firebaseconfig';
-import { collection, query, where, getDocs, getFirestore } from "firebase/firestore";
+import { 
+  collection,
+  query,
+  where,
+  getDocs,
+  getFirestore,
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -46,4 +55,24 @@ export const useApi = () => ({
     })
     return pet
   },
+  setPets: async (docData) => {
+    docData.uuid = create_UUID()
+    await setDoc(doc(db, "pets", docData.uuid), docData);
+  },
+  updatePet: async (docData) =>{
+    await updateDoc(doc(db, "pets", docData.uuid), docData);
+  },
+  deletePet: async (uuid) => {
+    await deleteDoc(doc(db, "pets", uuid));
+  }
 })
+
+function create_UUID(){
+  var dt = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = (dt + Math.random()*16)%16 | 0;
+      dt = Math.floor(dt/16);
+      return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+  });
+  return uuid;
+}
