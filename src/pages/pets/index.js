@@ -18,7 +18,6 @@ export const Pets = ({navigation}) => {
       const data = await api.getPets(uid)
       setPets(data)
     }
-    console.log('atualizou')
     fetchPet(auth.user.user_uid)
   }, [])
 

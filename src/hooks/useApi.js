@@ -53,17 +53,45 @@ export const useApi = () => ({
       // doc.data() is never undefined for query doc snapshots
       pet.push(doc.data());
     })
+    console.log('Buscou Pets')
     return pet
   },
   setPets: async (docData) => {
     docData.uuid = create_UUID()
     await setDoc(doc(db, "pets", docData.uuid), docData);
+    console.log('Criou pet')
   },
   updatePet: async (docData) =>{
     await updateDoc(doc(db, "pets", docData.uuid), docData);
+    console.log('Alterou pet')
   },
   deletePet: async (uuid) => {
     await deleteDoc(doc(db, "pets", uuid));
+    console.log('Apagou pet')
+  },
+  getVacs: async (pet_uuid) => {
+    const q = query(collection(db, "vacs"), where("pet_uuid", "==", pet_uuid));
+    const querySnapshot = await getDocs(q);
+    let vacs = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      vacs.push(doc.data());
+    })
+    console.log('Buscou Vacinas')
+    return vacs
+  },
+  setVac: async (docData) => {
+    docData.uuid = create_UUID()
+    await setDoc(doc(db, "vacs", docData.uuid), docData);
+    console.log('Criou Vacinas')
+  },
+  updateVac: async (docData) =>{
+    await updateDoc(doc(db, "vacs", docData.uuid), docData);
+    console.log('Alterou Vacina')
+  },
+  deleteVac: async (uuid) => {
+    await deleteDoc(doc(db, "vacs", uuid));
+    console.log('Deletou Vacina')
   }
 })
 

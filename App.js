@@ -12,8 +12,11 @@ import { NewResponsible } from './src/pages/responsible/newResponsible';
 import { Pets } from './src/pages/pets';
 import { NewPets } from './src/pages/pets/newPets';
 import { DetalhesPets } from './src/pages/pets/detalhesPets';
+import { Vacs } from './src/pages/vacs';
 
 import { AuthProvider } from './src/contexts/auth';
+import { NewVac } from './src/pages/vacs/newVac';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +94,24 @@ function App() {
             component={Maps}
             options={{
               title: "Search Vets",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='Vacs'
+            component={Vacs}
+            options={{
+              title: "Vacinas",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='NewVac'
+            component={NewVac}
+            options={{
+              title: "Vacina",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}
