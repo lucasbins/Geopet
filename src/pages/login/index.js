@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import AuthContext from '../../contexts/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,16 @@ export const Login = ({ navigation }) => {
   const [error, setError] = useState(false);
 
   const auth = useContext(AuthContext)
+
+  useEffect(() => {
+    AsyncStorage.getItem("USER").then((USER) => {
+      const login = JSON.parse(USER)
+      if(login){
+        auth.fetchUser(login.uid)
+        navigation.navigate('Menu')
+      }
+    })
+  },[])
 
   const handleSignIn = async () => {
     try {

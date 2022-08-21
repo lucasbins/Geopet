@@ -86,7 +86,7 @@ export const DetalhesPets = ({ navigation, route }) => {
 }
 
 const getIdade = (nasc) => {
-  var d = new Date
+  var d = new Date()
   if (nasc) {
     const data = nasc.toDate()
     return calculaIdade(data, d)

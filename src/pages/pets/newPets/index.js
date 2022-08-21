@@ -18,6 +18,7 @@ import AuthContext from '../../../contexts/auth';
 import { useApi } from '../../../hooks/useApi';
 
 import { Container } from './styles';
+import { ImageButton } from '../../../components/imageButton';
 
 export const NewPets = ({ navigation, route }) => {
   const params = route.params
@@ -36,7 +37,6 @@ export const NewPets = ({ navigation, route }) => {
   const auth = useContext(AuthContext)
 
   useEffect(() => {
-    console.log(params)
     if (params.acao == 'edit') {
       setPet(params.pet)
       setDate(params.pet.nascimento.toDate())
@@ -75,6 +75,10 @@ export const NewPets = ({ navigation, route }) => {
       setImage(result.base64);
     }
   };
+
+  const handleCancel = () => {
+    navigation.navigate('Pets')
+  }
 
   const handleSavePet = () => {
     let docData = pet;
@@ -140,20 +144,13 @@ export const NewPets = ({ navigation, route }) => {
                 <Text style={Container.input}>{getNasc(date)}</Text>
               </TouchableOpacity>
               <Text style={Container.label}>Selecionar Imagem</Text>
-              <TouchableOpacity 
-                style={Container.avatar}
-                onPress={pickImage}>
-                {image != '' ?
-                  <Image style={Container.imagePet} source={{ uri: 'data:image/jpeg;base64,' + image }} />
-                  :
-                  <Image style={Container.imagePet} source={require('../../../assets/icons/PetAvatar.png')} />
-                }
-              </TouchableOpacity>
+              <ImageButton image={image} pickImage={pickImage}/>
             </View>
             <View style={Container.rowBtn}>
               <TouchableOpacity
                 style={Container.cancelButton}
                 accessibilityLabel="Cancelar"
+                onPress={handleCancel}
               >
                 <Text style={Container.textBtn}>Cancelar</Text>
               </TouchableOpacity>

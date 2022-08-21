@@ -7,6 +7,11 @@ export const Responsible = ({ navigation }) => {
   const auth = useContext(AuthContext)
   const [user, setUser] = useState(auth.user)
 
+  const handleLogout = () => {
+    auth.logout()
+    navigation.navigate('Login')
+  }
+
   return (
     <View style={styles.container}>
       <View >
@@ -30,7 +35,7 @@ export const Responsible = ({ navigation }) => {
         <TouchableOpacity
           style={styles.logoutButton}
           accessibilityLabel="Editar"
-          onPress={() => navigation.navigate('Login')}>
+          onPress={handleLogout}>
           <Text style={styles.textBtn}>Logout</Text>
         </TouchableOpacity>
 

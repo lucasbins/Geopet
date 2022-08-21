@@ -20,9 +20,13 @@ export const AuthProvider = ({ children }) => {
     const data = await api.getUser(uid)
     setUser(data)
   }
+
+  const logout = async ( ) => {
+    api.signOut()
+  }
   
   return (
-    <AuthContext.Provider value={{user, signIn, fetchUser }}>
+    <AuthContext.Provider value={{user, signIn, fetchUser, logout }}>
       {children}
     </AuthContext.Provider>
   )

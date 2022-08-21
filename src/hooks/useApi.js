@@ -1,6 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from '@firebase/app';
-import { firebaseConfig } from '../config/firebaseconfig';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { 
   collection,
   query,
@@ -10,10 +8,11 @@ import {
   doc,
   setDoc,
   updateDoc,
-  deleteDoc } from "firebase/firestore";
+  deleteDoc,
+} from "firebase/firestore";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { auth, app } from "../config/auth";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
 export const useApi = () => ({
@@ -22,6 +21,7 @@ export const useApi = () => ({
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         user = userCredential.user;
+        AsyncStorage.setItem("USER",JSON.stringify(user))
       })
       .catch((error) => {
         return true;
@@ -38,12 +38,13 @@ export const useApi = () => ({
     })
     return user
   },
-  signOut: () => {
-    signOut(auth).then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
+  signOut: async () => {
+    try{
+      await AsyncStorage.removeItem("USER")
+    }catch(e){
+      console.log(e)
+    }
+    console.log('usuario removido')
   },
   getPets: async (user_uid) => {
     const q = query(collection(db, "pets"), where("user_uid", "==", user_uid));
@@ -69,8 +70,8 @@ export const useApi = () => ({
     await deleteDoc(doc(db, "pets", uuid));
     console.log('Apagou pet')
   },
-  getVacs: async (pet_uuid) => {
-    const q = query(collection(db, "vacs"), where("pet_uuid", "==", pet_uuid));
+  getVacs: async (pet_uid) => {
+    const q = query(collection(db, "vacs"), where("pet_uid", "==", pet_uid));
     const querySnapshot = await getDocs(q);
     let vacs = []
     querySnapshot.forEach((doc) => {
@@ -81,16 +82,16 @@ export const useApi = () => ({
     return vacs
   },
   setVac: async (docData) => {
-    docData.uuid = create_UUID()
-    await setDoc(doc(db, "vacs", docData.uuid), docData);
+    docData.uid = create_UUID()
+    await setDoc(doc(db, "vacs", docData.uid), docData);
     console.log('Criou Vacinas')
   },
   updateVac: async (docData) =>{
-    await updateDoc(doc(db, "vacs", docData.uuid), docData);
+    await updateDoc(doc(db, "vacs", docData.uid), docData);
     console.log('Alterou Vacina')
   },
-  deleteVac: async (uuid) => {
-    await deleteDoc(doc(db, "vacs", uuid));
+  deleteVac: async (uid) => {
+    await deleteDoc(doc(db, "vacs", uid));
     console.log('Deletou Vacina')
   }
 })

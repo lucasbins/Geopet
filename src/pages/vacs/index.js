@@ -8,7 +8,7 @@ import PlusButton from '../../components/plusButton';
 import { CardVac } from '../../components/cardVac';
 
 export const Vacs = ({navigation, route}) => {
-  const pet = route.params.pet
+  const [ pet, setPet] = useState(route.params.pet)
   const [ vacs, setVacs] = useState([])
 
   useEffect(() => {

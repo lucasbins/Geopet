@@ -17,13 +17,13 @@ export const CardVac = (params) => {
           <Text style={styles.label}>Data:</Text>
           <Text style={styles.text}>{getDate(vac.date.toDate())}</Text>
           <Text style={styles.label}>Proxima:</Text>
-          <Text style={styles.text}>{getDate(vac.next_vac.toDate())}</Text>
+          <Text style={styles.text}>{getDate(vac.nextVac.toDate())}</Text>
         </View>
         <View>
           <Text style={styles.label}>Rotulo:</Text>
-          {vac.image_url != '' ? 
+          {vac.rotulo ? 
               <Image style={styles.imageRotulo}
-              source={{ uri: 'data:image/jpeg;base64,' + vac.image_url}}/>
+              source={{ uri: 'data:image/jpeg;base64,' + vac.rotulo}}/>
            :
               <Image style={styles.imageRotulo}
               source={require('../../assets/icons/PetAvatar.png')}/>

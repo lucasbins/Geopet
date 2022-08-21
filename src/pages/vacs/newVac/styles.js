@@ -33,21 +33,8 @@ export const Container = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 15
    },
-   imagePet:{
-    resizeMode: 'cover',
-    marginTop: 20,
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: primaryColor,
-   },
-   avatar:{
-    flex: 1,
-    alignItems: 'center'
-   },
    saveButton: {
-    width: 150,
+    width: 100,
     height: 50,
     borderRadius: 10,
     backgroundColor: primaryColor,
@@ -57,7 +44,7 @@ export const Container = StyleSheet.create({
     alignItems: 'center'
   },
   cancelButton: {
-    width: 150,
+    width: 100,
     height: 50,
     borderRadius: 10,
     backgroundColor: '#cccccc',
@@ -72,5 +59,15 @@ export const Container = StyleSheet.create({
   },
   rowBtn:{
     flexDirection: 'row'
+  },
+  deleteButton:{
+    width: 100,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: '#f00',
+    padding: 5,
+    margin: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
