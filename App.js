@@ -16,6 +16,8 @@ import { Vacs } from './src/pages/vacs';
 
 import { AuthProvider } from './src/contexts/auth';
 import { NewVac } from './src/pages/vacs/newVac';
+import { Meds } from './src/pages/meds';
+import { NewMed } from './src/pages/meds/newMeds';
 
 
 const Stack = createNativeStackNavigator();
@@ -112,6 +114,24 @@ function App() {
             component={NewVac}
             options={{
               title: "Vacina",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='Meds'
+            component={Meds}
+            options={{
+              title: "Medicamentos",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='NewMed'
+            component={NewMed}
+            options={{
+              title: "Medicamento",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}

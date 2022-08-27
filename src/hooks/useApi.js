@@ -84,7 +84,7 @@ export const useApi = () => ({
   setVac: async (docData) => {
     docData.uid = create_UUID()
     await setDoc(doc(db, "vacs", docData.uid), docData);
-    console.log('Criou Vacinas')
+    console.log('Adicionou Vacina')
   },
   updateVac: async (docData) =>{
     await updateDoc(doc(db, "vacs", docData.uid), docData);
@@ -93,6 +93,30 @@ export const useApi = () => ({
   deleteVac: async (uid) => {
     await deleteDoc(doc(db, "vacs", uid));
     console.log('Deletou Vacina')
+  },
+  getMeds: async (petUid) => {
+    const q = query(collection(db, "medicamento"), where("petUid", "==", petUid));
+    const querySnapshot = await getDocs(q);
+    let meds = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      meds.push(doc.data());
+    })
+    console.log('Buscou Medicamentos')
+    return meds
+  },
+  setMed: async (docData) => {
+    docData.uid = create_UUID()
+    await setDoc(doc(db, "medicamento", docData.uid), docData);
+    console.log('Adicionou Medicamento')
+  },
+  updateMed: async (docData) =>{
+    await updateDoc(doc(db, "medicamento", docData.uid), docData);
+    console.log('Alterou Medicamento')
+  },
+  deleteMed: async (uid) => {
+    await deleteDoc(doc(db, "medicamento", uid));
+    console.log('Deletou medicamento')
   }
 })
 

@@ -110,14 +110,7 @@ export const NewVac = ({navigation,route}) => {
               <ImageButton image={image} pickImage={pickImage}/>
             </View>
             <View style={Container.rowBtn}>
-              <TouchableOpacity
-                style={Container.cancelButton}
-                accessibilityLabel="Cancelar"
-                onPress={handleCancel}
-              >
-                <Text style={Container.textBtn}>Cancelar</Text>
-              </TouchableOpacity>
-              {route.params.acao === 'edit' && 
+            {route.params.acao === 'edit' && 
                 <TouchableOpacity
                   style={Container.deleteButton}
                   accessibilityLabel="Deletar"
@@ -126,6 +119,13 @@ export const NewVac = ({navigation,route}) => {
                   <Text style={Container.textBtn}>Deletar</Text>
                 </TouchableOpacity>
               }
+              <TouchableOpacity
+                style={Container.cancelButton}
+                accessibilityLabel="Cancelar"
+                onPress={handleCancel}
+              >
+                <Text style={Container.textBtn}>Cancelar</Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 style={Container.saveButton}
                 accessibilityLabel="Salvar"
