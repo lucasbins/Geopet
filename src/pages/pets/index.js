@@ -18,7 +18,7 @@ export const Pets = ({navigation}) => {
       const data = await api.getPets(uid)
       setPets(data)
     }
-    fetchPet(auth.user.user_uid)
+    fetchPet(auth.user)
   }, [])
 
   const onPressNewPets = () => {

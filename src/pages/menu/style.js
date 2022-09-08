@@ -4,7 +4,7 @@ import { primaryColor, secondaryColor, background } from "../../config/stylesCol
 export const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: primaryColor,
+    backgroundColor: background,
     alignItems: 'center',
     justifyContent: "center"
   },
@@ -14,24 +14,21 @@ export const styles = StyleSheet.create({
     height: 200,
   },
   container:{
-    marginTop: 50
+    marginTop: 10,
+    justifyContent: 'center'
   },
   rowButtons:{
-    flexDirection: "row",
-    marginTop: 20
-  },
-  buttonsMenu:{
-    width: 80,
-    height: 80,
-    backgroundColor: background,
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "center",
-    borderRadius: 10,
-    marginLeft: 10,
-    marginRight: 10
   },
-  imageButton:{
-    width: 50,
-    height: 50,
+  logout:{
+    justifyContent: "center",
+    fontSize: 20,
+    color: secondaryColor,
+  },
+  btnLogout:{
+    alignItems: "center",
+    justifyContent: 'center',
+    padding: 25,
   }
 })

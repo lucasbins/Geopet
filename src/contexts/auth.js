@@ -10,15 +10,11 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     const uid = await api.signin(email, password);
     if(uid != null){
-      fetchUser(uid)
+      setUser(uid)
       return true;
     }else{
       return false;
     }
-  }
-  const fetchUser = async (uid) => {
-    const data = await api.getUser(uid)
-    setUser(data)
   }
 
   const logout = async ( ) => {
@@ -26,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   }
   
   return (
-    <AuthContext.Provider value={{user, signIn, fetchUser, logout }}>
+    <AuthContext.Provider value={{user, signIn, logout }}>
       {children}
     </AuthContext.Provider>
   )

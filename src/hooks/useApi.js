@@ -20,6 +20,7 @@ export const useApi = () => ({
     let user = null
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log("logou")
         user = userCredential.user;
         AsyncStorage.setItem("USER",JSON.stringify(user))
       })

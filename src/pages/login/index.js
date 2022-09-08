@@ -22,7 +22,6 @@ export const Login = ({ navigation }) => {
     AsyncStorage.getItem("USER").then((USER) => {
       const login = JSON.parse(USER)
       if(login){
-        auth.fetchUser(login.uid)
         navigation.navigate('Menu')
       }
     })
@@ -46,7 +45,7 @@ export const Login = ({ navigation }) => {
       style={styles.background}>
       <View style={styles.containerLogo}>
           <Image style={styles.logo}
-            source={require('../../assets/img/Logo.png')} />
+            source={require('../../assets/img/Logo_icon.png')} />
       </View>
 
       <View style={styles.container}>

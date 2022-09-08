@@ -7,8 +7,6 @@ import { Login } from './src/pages/login';
 import { NewUser } from './src/pages/login/newUser';
 import { Menu } from './src/pages/menu';
 import { Maps } from './src/pages/maps';
-import { Responsible } from './src/pages/responsible';
-import { NewResponsible } from './src/pages/responsible/newResponsible';
 import { Pets } from './src/pages/pets';
 import { NewPets } from './src/pages/pets/newPets';
 import { DetalhesPets } from './src/pages/pets/detalhesPets';
@@ -45,24 +43,6 @@ function App() {
             name='Menu'
             component={Menu}
             options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Responsible'
-            component={Responsible}
-            options={{
-              title: "Responsável",
-              headerTintColor: primaryColor,
-              headerTitleAlign: "center",
-            }}
-          />
-          <Stack.Screen
-            name='newResponsible'
-            component={NewResponsible}
-            options={{
-              title: "Editar Responsável",
-              headerTintColor: primaryColor,
-              headerTitleAlign: "center",
-            }}
           />
           <Stack.Screen
             name='Pets'

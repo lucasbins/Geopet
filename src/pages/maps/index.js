@@ -14,11 +14,13 @@ export function Maps({navigation}) {
   const [markers, setMarkers] = useState(null);
 
   function searchVet (location) {
-    
+    //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=2000&keyword=veterinário&key=${API_KEY}
+    //https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=veterinario&inputtype=textquery&locationbias=circle%3A2000%${location.latitude}%${location.longitude}&key=${API_KEY}
     const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=2000&keyword=veterinário&key=${API_KEY}`
     fetch(url,{ method: 'GET'})
     .then((resp) => resp.json())
     .then(function(data) {
+      console.log('Localizou')
       setMarkers(data.results)
     })
     .catch(function(error) {

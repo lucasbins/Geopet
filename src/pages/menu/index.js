@@ -1,8 +1,27 @@
-import React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import React, {useContext} from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { ButtonMenu } from '../../components/buttonMenu';
 import { styles } from './style';
 
+import AuthContext from '../../contexts/auth';
+
 export const Menu = ({navigation}) => {
+  const auth = useContext(AuthContext)
+
+  const onPressMaps = () => {
+    navigation.navigate('Maps')
+  }
+  const onPressPets = () => {
+    navigation.navigate('Pets')
+  }
+  const onPressAgenda = () => {
+    navigation.navigate('Agenda')
+  }
+
+  const onPressLogout = () => {
+    auth.logout()
+    navigation.navigate('Login')
+  }
 
   return (
     <View style={styles.background}>
@@ -13,43 +32,14 @@ export const Menu = ({navigation}) => {
       </View>
       <View style={styles.container}>
         <View style={styles.rowButtons}>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Maps')}
-            style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/PinMarkerButton.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Responsible')}
-            style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/Responsavel.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Pets')}
-            style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/Pet.png')} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.rowButtons}>
-          <TouchableOpacity style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/Vacinas.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/Remedios.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsMenu}>
-            <Image
-              style={styles.imageButton}
-              source={require('../../assets/icons/Parasita.png')} />
+          <ButtonMenu icon={"map"} onPress={onPressMaps} title={'Localizar Veterinaria'} />
+          <ButtonMenu icon={"pet"} onPress={onPressPets} title={'Meus Pets'}/>
+          <ButtonMenu icon={"agenda"} onPress={onPressAgenda} title={'Agenda'}/>
+          <TouchableOpacity
+            style={styles.btnLogout}
+            onPress={onPressLogout}
+          >
+            <Text style={styles.logout}>Sair</Text>
           </TouchableOpacity>
         </View>
       </View>
