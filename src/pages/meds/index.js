@@ -5,7 +5,7 @@ import { useApi } from '../../hooks/useApi';
 import { styles } from './style';
 
 import PlusButton from '../../components/plusButton';
-import { CardMed } from '../../components/cardMed';
+import { CardMed } from '../../components/cards/cardMed';
 
 export const Meds = ({navigation, route}) => {
   const [ pet, setPet] = useState(route.params.pet)

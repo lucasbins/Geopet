@@ -27,7 +27,7 @@ export const Calendario = (params) => {
 
   const getDate = (nasc) => {
     if (nasc) {
-      return (`${nasc.getDate()} / ${nasc.getMonth()} / ${nasc.getFullYear()}`)
+      return (`${nasc.getDate()} / ${nasc.getMonth()+1} / ${nasc.getFullYear()}`)
     }
   }
 

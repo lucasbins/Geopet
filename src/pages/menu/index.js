@@ -32,7 +32,7 @@ export const Menu = ({navigation}) => {
       </View>
       <View style={styles.container}>
         <View style={styles.rowButtons}>
-          <ButtonMenu icon={"map"} onPress={onPressMaps} title={'Localizar Veterinaria'} />
+          <ButtonMenu icon={"map"} onPress={onPressMaps} title={'Localizar clínicas'} />
           <ButtonMenu icon={"pet"} onPress={onPressPets} title={'Meus Pets'}/>
           <ButtonMenu icon={"agenda"} onPress={onPressAgenda} title={'Agenda'}/>
           <TouchableOpacity

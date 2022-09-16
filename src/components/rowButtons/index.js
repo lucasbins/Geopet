@@ -14,7 +14,8 @@ export const RowButtons = ( params) => {
         onPress={params.med}>
         <Image style={Container.imageButton} source={require('../../assets/icons/Remedios.png')} />
       </TouchableOpacity>
-      <TouchableOpacity style={Container.button}>
+      <TouchableOpacity style={Container.button}
+        onPress={params.anti}>
         <Image style={Container.imageButton} source={require('../../assets/icons/Parasita.png')} />
       </TouchableOpacity>
     </View>

@@ -5,7 +5,7 @@ import AuthContext from '../../contexts/auth';
 
 import { styles } from './style';
 
-import CardPet from '../../components/cardPet';
+import CardPet from '../../components/cards/cardPet';
 import PlusButton from '../../components/plusButton';
 
 export const Pets = ({navigation}) => {

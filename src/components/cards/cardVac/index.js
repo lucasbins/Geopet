@@ -26,7 +26,7 @@ export const CardVac = (params) => {
               source={{ uri: 'data:image/jpeg;base64,' + vac.rotulo}}/>
            :
               <Image style={styles.imageRotulo}
-              source={require('../../assets/icons/PetAvatar.png')}/>
+              source={require('../../../assets/icons/PetAvatar.png')}/>
           }
         </View>
       </View>
@@ -35,5 +35,5 @@ export const CardVac = (params) => {
 }
 
 const getDate= (date) => {
- return (`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
-}
+  return (`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
+ }

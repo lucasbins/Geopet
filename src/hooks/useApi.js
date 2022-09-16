@@ -25,6 +25,7 @@ export const useApi = () => ({
         AsyncStorage.setItem("USER",JSON.stringify(user))
       })
       .catch((error) => {
+        console.log(error);
         return true;
       });
     return user.uid;
@@ -118,6 +119,30 @@ export const useApi = () => ({
   deleteMed: async (uid) => {
     await deleteDoc(doc(db, "medicamento", uid));
     console.log('Deletou medicamento')
+  },
+  getAnti: async (petUid) => {
+    const q = query(collection(db, "antiparasitario"), where("petUid", "==", petUid));
+    const querySnapshot = await getDocs(q);
+    let Anti = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      Anti.push(doc.data());
+    })
+    console.log('Buscou Antiparasitario')
+    return Anti
+  },
+  setAnti: async (docData) => {
+    docData.uid = create_UUID()
+    await setDoc(doc(db, "antiparasitario", docData.uid), docData);
+    console.log('Adicionou Antiparasitario')
+  },
+  updateAnti: async (docData) =>{
+    await updateDoc(doc(db, "antiparasitario", docData.uid), docData);
+    console.log('Alterou Antiparasitario')
+  },
+  deleteAnti: async (uid) => {
+    await deleteDoc(doc(db, "antiparasitario", uid));
+    console.log('Deletou antiparasitario')
   }
 })
 

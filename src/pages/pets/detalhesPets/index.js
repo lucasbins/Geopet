@@ -31,6 +31,10 @@ export const DetalhesPets = ({ navigation, route }) => {
     navigation.navigate("Meds", { pet : pet})
   }
 
+  const handleAnti = () => {
+    navigation.navigate("Anti", { pet : pet})
+  }
+
   return (
     <SafeAreaView style={container.container}>
       <ScrollView style={container.scrollView}>
@@ -65,7 +69,7 @@ export const DetalhesPets = ({ navigation, route }) => {
           <View style={container.div}/>
           <View style={container.card}>
             <View style={container.rowButtons}>
-              <RowButtons vac={handleVac} med={handleMed}></RowButtons>
+              <RowButtons vac={handleVac} med={handleMed} anti={handleAnti}></RowButtons>
             </View>
           </View>
           <View style={container.div}/>

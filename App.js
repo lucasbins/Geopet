@@ -11,12 +11,13 @@ import { Pets } from './src/pages/pets';
 import { NewPets } from './src/pages/pets/newPets';
 import { DetalhesPets } from './src/pages/pets/detalhesPets';
 import { Vacs } from './src/pages/vacs';
-
-import { AuthProvider } from './src/contexts/auth';
 import { NewVac } from './src/pages/vacs/newVac';
 import { Meds } from './src/pages/meds';
 import { NewMed } from './src/pages/meds/newMeds';
+import { Anti } from './src/pages/antipara';
+import { NewAnti } from './src/pages/antipara/newAntipara';
 
+import { AuthProvider } from './src/contexts/auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,7 +76,7 @@ function App() {
             name='Maps'
             component={Maps}
             options={{
-              title: "Search Vets",
+              title: "Localizar clínicas",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}
@@ -112,6 +113,24 @@ function App() {
             component={NewMed}
             options={{
               title: "Medicamento",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='Anti'
+            component={Anti}
+            options={{
+              title: "AntiParasitario",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='NewAnti'
+            component={NewAnti}
+            options={{
+              title: "AntiParasitario",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}
