@@ -90,17 +90,19 @@ export const NewPets = ({ navigation, route }) => {
         Timestamp.fromDate(date)
       }
       if(pet.user_uid == null){
-        docData.user_uid = auth.user.user_uid
+        docData.user_uid = auth.user
       }
 
       if(params.acao == 'new'){
         api.setPets(docData).then(() => {
           showAlert()
+          auth.getPets(auth.user)
           navigation.navigate('Pets')
         })
       }else if(params.acao == 'edit'){
         api.updatePet(docData).then(() => {
           showAlert()
+          auth.getPets(auth.user)
           navigation.navigate('Pets')
         })
       }

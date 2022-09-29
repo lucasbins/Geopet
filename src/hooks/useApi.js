@@ -30,23 +30,13 @@ export const useApi = () => ({
       });
     return user.uid;
   },
-  getUser: async (user_uid) => {
-    const q = query(collection(db, "responsible"), where("user_uid", "==", user_uid));
-    const querySnapshot = await getDocs(q);
-    let user = {}
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      user = JSON.parse(JSON.stringify(doc.data()));
-    })
-    return user
-  },
   signOut: async () => {
     try{
       await AsyncStorage.removeItem("USER")
+      console.log('usuario removido')
     }catch(e){
       console.log(e)
     }
-    console.log('usuario removido')
   },
   getPets: async (user_uid) => {
     const q = query(collection(db, "pets"), where("user_uid", "==", user_uid));

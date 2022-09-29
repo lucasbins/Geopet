@@ -13,13 +13,8 @@ export const Pets = ({navigation}) => {
   const auth = useContext(AuthContext)
 
   useEffect(() => {
-    const fetchPet = async (uid) => {
-      const api = useApi()
-      const data = await api.getPets(uid)
-      setPets(data)
-    }
-    fetchPet(auth.user)
-  }, [])
+    setPets(auth.pets)
+  }, [auth.pets])
 
   const onPressNewPets = () => {
     navigation.navigate('NewPets', {acao: 'new'})

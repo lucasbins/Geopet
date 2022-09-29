@@ -16,6 +16,7 @@ import { Meds } from './src/pages/meds';
 import { NewMed } from './src/pages/meds/newMeds';
 import { Anti } from './src/pages/antipara';
 import { NewAnti } from './src/pages/antipara/newAntipara';
+import { Agenda } from './src/pages/agenda';
 
 import { AuthProvider } from './src/contexts/auth';
 
@@ -135,7 +136,15 @@ function App() {
               headerTitleAlign: "center",
             }}
           />
-
+          <Stack.Screen
+            name='Agenda'
+            component={Agenda}
+            options={{
+              title: "Agenda",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
