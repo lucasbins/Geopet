@@ -57,11 +57,13 @@ export const NewAnti = ({navigation,route}) => {
       if(route.params.acao === 'new'){
         api.setanti(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Anti', {pet: route.params.pet})
         })
       }else if(route.params.acao === 'edit'){
         api.updateanti(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Anti', {pet: route.params.pet})
         })
       }

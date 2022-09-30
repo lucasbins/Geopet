@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import { registerRootComponent } from 'expo';
 import { styles } from './styles';
 
-import { API_KEY } from '../../config/apiKey'
+import { API_KEY } from '../../config/firebaseconfig'
 
 export function Maps({ navigation }) {
   const [location, setLocation] = useState(null);

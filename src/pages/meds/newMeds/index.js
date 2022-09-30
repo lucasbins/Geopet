@@ -56,11 +56,13 @@ export const NewMed = ({navigation,route}) => {
       if(route.params.acao === 'new'){
         api.setMed(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Meds', {pet: route.params.pet})
         })
       }else if(route.params.acao === 'edit'){
         api.updateMed(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Meds', {pet: route.params.pet})
         })
       }

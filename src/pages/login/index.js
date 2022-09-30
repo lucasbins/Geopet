@@ -21,7 +21,7 @@ export const Login = ({ navigation }) => {
   useEffect(() => {
     AsyncStorage.getItem("USER").then((USER) => {
       const login = JSON.parse(USER)
-      if(login){
+      if(login && auth.user){
         navigation.navigate('Menu')
       }
     })

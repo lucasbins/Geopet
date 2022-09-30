@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Text,
   View,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  Image,
   Alert
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
@@ -17,6 +14,8 @@ import { Calendario } from '../../../components/calendario';
 import { useApi } from '../../../hooks/useApi';
 import { Timestamp } from "firebase/firestore";
 import { ImageButton } from '../../../components/imageButton';
+import AuthContext from '../../../contexts/auth';
+
 
 export const NewVac = ({navigation,route}) => {
   const [ vac, setVac ] = useState({
@@ -31,6 +30,8 @@ export const NewVac = ({navigation,route}) => {
   const [ image, setImage ] = useState('')
 
   const api = useApi();
+  const auth = useContext(AuthContext)
+
   
   useEffect(() => {
     if(route.params.acao == 'edit'){
@@ -80,11 +81,13 @@ export const NewVac = ({navigation,route}) => {
       if(route.params.acao === 'new'){
         api.setVac(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Vacs', {pet: route.params.pet})
         })
       }else if(route.params.acao === 'edit'){
         api.updateVac(docData).then(() => {
           showAlert()
+          auth.getPets(route.params.pet.user_uid)
           navigation.navigate('Vacs', {pet: route.params.pet})
         })
       }

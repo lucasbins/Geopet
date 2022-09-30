@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { ButtonMenu } from '../../components/buttonMenu';
 import { styles } from './style';
@@ -7,6 +7,12 @@ import AuthContext from '../../contexts/auth';
 
 export const Menu = ({navigation}) => {
   const auth = useContext(AuthContext)
+
+  useEffect(() => {
+    if(auth.user == null){
+      navigation.navigate('Login')
+    }
+  },[auth.user])
 
   const onPressMaps = () => {
     navigation.navigate('Maps')

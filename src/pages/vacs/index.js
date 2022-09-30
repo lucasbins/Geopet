@@ -1,31 +1,27 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
-import { useApi } from '../../hooks/useApi';
 
 import { styles } from './style';
 
 import PlusButton from '../../components/plusButton';
 import { CardVac } from '../../components/cards/cardVac';
+import AuthContext from '../../contexts/auth';
 
 export const Vacs = ({navigation, route}) => {
-  const [ pet, setPet] = useState(route.params.pet)
-  const [ vacs, setVacs] = useState([])
+  const pet = route.params.pet
+  const [ vacs , setVacs] = useState([])
+  const auth = useContext(AuthContext)
 
   useEffect(() => {
-    const fetchVac = async (uid) => {
-      const api = useApi()
-      const data = await api.getVacs(uid)
-      setVacs(data)
-    }
-    fetchVac(pet.uuid)
-  }, [])
+    setVacs(route.params.pet.vacs)
+  },[auth.pet])
 
   const onPressNewVacs = () => {
     navigation.navigate('NewVac', { pet: pet, acao: 'new' })
   }
 
   const onPressDetailsVacs = (vac) => {
-    navigation.navigate('NewVac', { vac: vac , acao: 'edit'})
+    navigation.navigate('NewVac', { pet: pet, vac: vac, acao: 'edit'})
   } 
  
   return (

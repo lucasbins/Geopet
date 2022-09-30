@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { useApi } from '../hooks/useApi';
+import { usePets } from '../hooks/usePets';
 
 const AuthContext = createContext({});
 
@@ -7,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [pets, setPets ] = useState(null)
   const api = useApi()
+  const petFactory = usePets()
 
   const signIn = async (email, password) => {
     const uid = await api.signin(email, password);
@@ -24,11 +26,12 @@ export const AuthProvider = ({ children }) => {
   }
 
   const getPets = async (uid) => {
-    const pet = await api.getPets(uid)
+    const pet = await petFactory.getFullPets(uid)
     if(pet){
       setPets(pet)
     }
   }
+
   
   return (
     <AuthContext.Provider value={{user, signIn, logout, pets, getPets }}>

@@ -5,6 +5,8 @@ import {
   where,
   getDocs,
   getFirestore,
+  initializeFirestore,
+  CACHE_SIZE_UNLIMITED,
   doc,
   setDoc,
   updateDoc,
@@ -13,7 +15,11 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth, app } from "../config/auth";
 
-const db = getFirestore(app);
+//const db = getFirestore(app);
+
+const db = initializeFirestore(app, {
+  cacheSizeBytes: CACHE_SIZE_UNLIMITED
+});
 
 export const useApi = () => ({
   signin: async (email, password) => { 
@@ -42,8 +48,7 @@ export const useApi = () => ({
     const q = query(collection(db, "pets"), where("user_uid", "==", user_uid));
     const querySnapshot = await getDocs(q);
     let pet = []
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
+    querySnapshot.forEach((doc) => { 
       pet.push(doc.data());
     })
     console.log('Buscou Pets')
