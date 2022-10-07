@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   View,
@@ -11,28 +11,40 @@ import {
 import { RowButtons } from '../../../components/rowButtons';
 import { container } from './styles';
 import { useApi } from '../../../hooks/useApi';
+import AuthContext from '../../../contexts/auth';
 
 export const DetalhesPets = ({ navigation, route }) => {
   const pet = route.params.pet;
-
   const api = useApi()
+  const auth = useContext(AuthContext)
 
   const handleDelete = (uuid) => {
-    showAlert()
-    api.deletePet(uuid)
-    navigation.navigate("Pets", { atualizou : true})
+    Alert.alert("Cuidado", "Você tem certeza que quer deletar?", [
+      {
+        text: "Não",
+        style: "cancel"
+      },
+      {
+        text: "Sim",
+        onPress: () => {
+          api.deletePet(uuid)
+          auth.getPets(auth.user)
+          navigation.navigate("Pets", { atualizou: true })
+        }
+      }]
+    );
   }
 
   const handleVac = () => {
-    navigation.navigate("Vacs", { pet : pet})
+    navigation.navigate("Vacs", { pet: pet })
   }
 
   const handleMed = () => {
-    navigation.navigate("Meds", { pet : pet})
+    navigation.navigate("Meds", { pet: pet })
   }
 
   const handleAnti = () => {
-    navigation.navigate("Anti", { pet : pet})
+    navigation.navigate("Anti", { pet: pet })
   }
 
   return (
@@ -42,7 +54,7 @@ export const DetalhesPets = ({ navigation, route }) => {
           <Text style={container.title}>{pet.nome}</Text>
           <View>
             {pet.avatar != '' ?
-              <Image style={container.imagePet} source={{ uri: 'data:image/jpeg;base64,' + pet.avatar}}/>
+              <Image style={container.imagePet} source={{ uri: 'data:image/jpeg;base64,' + pet.avatar }} />
               :
               <Image style={container.imagePet} source={require('../../../assets/icons/PetAvatar.png')} />
             }
@@ -66,23 +78,23 @@ export const DetalhesPets = ({ navigation, route }) => {
 
             </View>
           </View>
-          <View style={container.div}/>
+          <View style={container.div} />
           <View style={container.card}>
             <View style={container.rowButtons}>
               <RowButtons vac={handleVac} med={handleMed} anti={handleAnti}></RowButtons>
             </View>
           </View>
-          <View style={container.div}/>
+          <View style={container.div} />
           <View style={container.card}>
             <View style={container.rowButtons}>
-              <TouchableOpacity 
-              style={container.buttonRed}
-              onPress={() => handleDelete(pet.uuid)}
+              <TouchableOpacity
+                style={container.buttonRed}
+                onPress={() => handleDelete(pet.uuid)}
               >
                 <Text style={container.textButton}>Deletar</Text>
               </TouchableOpacity>
               <TouchableOpacity style={container.button}
-                onPress={() => navigation.navigate('NewPets', {pet : pet , acao: 'edit'})}>
+                onPress={() => navigation.navigate('NewPets', { pet: pet, acao: 'edit' })}>
                 <Text style={container.textButton}>Editar</Text>
               </TouchableOpacity>
             </View>
@@ -103,11 +115,4 @@ const getIdade = (nasc) => {
 
 function calculaIdade(nascimento, hoje) {
   return Math.floor(Math.ceil(Math.abs(nascimento.getTime() - hoje.getTime()) / (1000 * 3600 * 24)) / 365.25);
-}
-
-const showAlert = () =>{
-  Alert.alert(
-    "Sucesso",
-    "Deletado!",
-  );
 }

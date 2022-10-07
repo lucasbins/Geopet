@@ -5,54 +5,56 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
   Alert
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+
 import { Container } from './styles';
+
 import { Calendario } from '../../../components/calendario';
-import { useApi } from '../../../hooks/useApi';
-import { Timestamp } from "firebase/firestore";
 import { ImageButton } from '../../../components/imageButton';
+import { Timestamp } from "firebase/firestore";
+import { uuidv4 } from "@firebase/util";
+
+import { useApi } from '../../../hooks/useApi';
 import AuthContext from '../../../contexts/auth';
+import { Button } from '../../../components/button';
 
-
-export const NewVac = ({navigation,route}) => {
-  const [ vac, setVac ] = useState({
-    name: '',
-    date: new Date(),
-    nextVac: new Date(),
-    pet_uid: '',
+export const NewVac = ({ navigation, route }) => {
+  const [vac, setVac] = useState({
+    uuid: '',
+    nome: '',
+    data: Timestamp.now(),
+    proximaVacina: Timestamp.now(),
     rotulo: ''
   })
   const [dateVac, setDateVac] = useState(new Date())
   const [nextVac, setNextVac] = useState(new Date())
-  const [ image, setImage ] = useState('')
 
   const api = useApi();
   const auth = useContext(AuthContext)
 
-  
   useEffect(() => {
-    if(route.params.acao == 'edit'){
+    if (route.params.acao == 'edit') {
       setVac(route.params.vac)
-      setDateVac(route.params.vac.date.toDate())
-      setNextVac(route.params.vac.nextVac.toDate())
-      setImage(route.params.vac.rotulo)
-    }else if(route.params.acao == 'new'){
-      setVac({...vac, pet_uid: route.params.pet.uuid})
+      setDateVac(route.params.vac.data.toDate())
+      setNextVac(route.params.vac.proximaVacina.toDate())
+    } else if (route.params.acao == 'new') {
+      setVac({ ...vac, uuid: uuidv4() })
     }
-  },[])
+  }, [])
 
-  const handleCancel = () =>{
-    navigation.navigate('Vacs', {pet: route.params.pet})
+  const handleCancel = () => {
+    navigation.navigate('Vacs', { pet: route.params.pet })
   }
 
   const handleSelectDate = (date) => {
     setDateVac(date)
+    setVac({ ...vac, data: Timestamp.fromDate(date) })
   }
   const handleSelectNextVac = (date) => {
     setNextVac(date)
+    setVac({ ...vac, proximaVacina: Timestamp.fromDate(date) })
   }
 
   const pickImage = async () => {
@@ -63,89 +65,86 @@ export const NewVac = ({navigation,route}) => {
       allowsEditing: true,
       base64: true
     });
-
     if (!result.cancelled) {
-      setImage(result.base64);
+      setVac({ ...vac, rotulo: result.base64 });
     }
   };
 
   const handleSaveVac = () => {
-    let docData = vac;
-    docData.date = Timestamp.fromDate(dateVac)
-    docData.nextVac = Timestamp.fromDate(nextVac)
-    if(vac){
-      if(image !== ''){
-        docData.rotulo = image
-      }
-      
-      if(route.params.acao === 'new'){
-        api.setVac(docData).then(() => {
-          showAlert()
-          auth.getPets(route.params.pet.user_uid)
-          navigation.navigate('Vacs', {pet: route.params.pet})
+    let docData = route.params.pet;
+    if (vac) {
+      if (route.params.acao === 'new') {
+        docData.vacina.push(vac)
+        savePet(docData)
+        Alert.alert("Sucesso", "Vacina adicionada com sucesso!");
+      } else if (route.params.acao === 'edit') {
+        docData.vacina.map((vacina, i) => {
+          if (vacina.uuid == vac.uuid) {
+            docData.vacina[i] = vac;
+          }
         })
-      }else if(route.params.acao === 'edit'){
-        api.updateVac(docData).then(() => {
-          showAlert()
-          auth.getPets(route.params.pet.user_uid)
-          navigation.navigate('Vacs', {pet: route.params.pet})
-        })
+        savePet(docData)
+        Alert.alert("Sucesso", "Vacina editada com sucesso!");
       }
     }
+  }
+
+  const handleDeleteVac = () => {
+    Alert.alert("Cuidado", "Você tem certeza que quer deletar?", [
+      {
+        text: "Não",
+        style: "cancel"
+      },
+      {
+        text: "Sim",
+        onPress: () => {
+          let docData = route.params.pet;
+          docData.vacina.map((vacina, i) => {
+            if (vacina.uuid == vac.uuid) {
+              docData.vacina.splice(i, 1);
+            }
+          })
+          savePet(docData)
+        }
+      }]
+    );
+  }
+
+  const savePet = async (docData) => {
+    await api.updatePet(docData).then(() => {
+      auth.getPets(route.params.pet.user_uid)
+      navigation.navigate('Vacs', { pet: route.params.pet })
+    })
   }
 
   return (
     <SafeAreaView style={Container.container}>
       <ScrollView style={Container.scrollView}>
-      <View style={Container.View}>
-            <View style={Container.list}>
-              <Text style={Container.label}>Nome</Text>
-              <TextInput
-                style={Container.input}
-                value={vac.name}
-                onChangeText={(text) => setVac({ ...vac, name: text })}
-              />
-              <Text style={Container.label}>Data da vacina:</Text>
-              <Calendario data={dateVac} setDate={handleSelectDate}/>
-              <Text style={Container.label}>Data da proxima vacina:</Text>
-              <Calendario data={nextVac} setDate={handleSelectNextVac}/>
-              <Text style={Container.label}>Foto do Rotulo:</Text>
-              <ImageButton image={image} pickImage={pickImage}/>
-            </View>
-            <View style={Container.rowBtn}>
-            {route.params.acao === 'edit' && 
-                <TouchableOpacity
-                  style={Container.deleteButton}
-                  accessibilityLabel="Deletar"
-                  onPress={handleCancel}
-                >
-                  <Text style={Container.textBtn}>Deletar</Text>
-                </TouchableOpacity>
-              }
-              <TouchableOpacity
-                style={Container.cancelButton}
-                accessibilityLabel="Cancelar"
-                onPress={handleCancel}
-              >
-                <Text style={Container.textBtn}>Cancelar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={Container.saveButton}
-                accessibilityLabel="Salvar"
-                onPress={handleSaveVac}
-              >
-                <Text style={Container.textBtn}>Salvar</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={Container.View}>
+          <View style={Container.list}>
+            <Text style={Container.label}>Nome</Text>
+            <TextInput
+              style={Container.input}
+              value={vac.nome}
+              onChangeText={(text) => setVac({ ...vac, nome: text })}
+            />
+            <Text style={Container.label}>Data da vacina:</Text>
+            <Calendario data={dateVac} setDate={handleSelectDate} />
+            <Text style={Container.label}>Data da proxima vacina:</Text>
+            <Calendario data={nextVac} setDate={handleSelectNextVac} />
+            <Text style={Container.label}>Foto do Rotulo:</Text>
+            <ImageButton image={vac.rotulo} pickImage={pickImage} />
           </View>
+          <View style={Container.rowBtn}>
+            {route.params.acao === 'edit' &&
+              <Button title="Deletar" callback={handleDeleteVac} />
+            }
+            <Button title="Cancelar" callback={handleCancel} />
+            <Button title="Salvar" callback={handleSaveVac} />
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
-    );
-}
-
-const showAlert = () =>{
-  Alert.alert(
-    "Sucesso",
-    "Vacina adicionada com sucesso!",
   );
 }
+

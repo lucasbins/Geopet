@@ -11,9 +11,9 @@ export const CardAnti = ({anti, change}) => {
       <View style={styles.line}>
         <View style={styles.name}>
           <Text style={styles.label}>Fabricante:</Text>
-          <Text style={styles.text}>{anti.Fabricante}</Text>
+          <Text style={styles.text}>{anti.fabricante}</Text>
           <Text style={styles.label}>Tipo:</Text>
-          <Text style={styles.text}>{anti.Tipo}</Text>
+          <Text style={styles.text}>{anti.tipo}</Text>
           <Text style={styles.label}>Inicio do tratamento:</Text>
           <Text style={styles.text}>{getDate(anti.dataInicio.toDate())}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>

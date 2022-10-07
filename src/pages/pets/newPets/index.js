@@ -11,14 +11,16 @@ import {
   Image,
   Alert
 } from 'react-native';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
 import { Timestamp } from "firebase/firestore";
+
 import AuthContext from '../../../contexts/auth';
 import { useApi } from '../../../hooks/useApi';
 
 import { Container } from './styles';
 import { ImageButton } from '../../../components/imageButton';
+import { Calendario } from '../../../components/calendario';
+import { Button } from '../../../components/button';
 
 export const NewPets = ({ navigation, route }) => {
   const params = route.params
@@ -27,8 +29,11 @@ export const NewPets = ({ navigation, route }) => {
     nome: '',
     raca: '',
     porte: '',
-    nascimento: new Date(),
-    peso: ''
+    nascimento: Timestamp.now(),
+    peso: '',
+    vacina: [],
+    medicamento: [],
+    antiparasitario: []
   })
   const [date, setDate] = useState(new Date());
   const [image, setImage] = useState('')
@@ -44,22 +49,9 @@ export const NewPets = ({ navigation, route }) => {
     }
   }, [])
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setDate(currentDate);
-  };
-
-  const showMode = (currentMode) => {
-    DateTimePickerAndroid.open({
-      value: date,
-      onChange,
-      mode: currentMode,
-      is24Hour: true,
-    });
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
+  const handleSelectNascimento = (date) => {
+    setDate(date);
+    setPet({...pet, nascimento: Timestamp.fromDate(date)})
   };
 
   const pickImage = async () => {
@@ -72,7 +64,7 @@ export const NewPets = ({ navigation, route }) => {
     });
 
     if (!result.cancelled) {
-      setImage(result.base64);
+      setPet({...pet, avatar: result.base64})
     }
   };
 
@@ -83,16 +75,9 @@ export const NewPets = ({ navigation, route }) => {
   const handleSavePet = () => {
     let docData = pet;
     if(pet){
-      if(image){
-        docData.avatar = image
-      }
-      if(date){
-        Timestamp.fromDate(date)
-      }
       if(pet.user_uid == null){
         docData.user_uid = auth.user
       }
-
       if(params.acao == 'new'){
         api.setPets(docData).then(() => {
           showAlert()
@@ -142,11 +127,9 @@ export const NewPets = ({ navigation, route }) => {
                 onChangeText={(text) => setPet({ ...pet, porte: text })}
               />
               <Text style={Container.label}>Nascimento</Text>
-              <TouchableOpacity onPress={showDatepicker}>
-                <Text style={Container.input}>{getNasc(date)}</Text>
-              </TouchableOpacity>
+              <Calendario data={date} setDate={handleSelectNascimento}/>
               <Text style={Container.label}>Selecionar Imagem</Text>
-              <ImageButton image={image} pickImage={pickImage}/>
+              <ImageButton image={pet.avatar} pickImage={pickImage}/>
             </View>
             <View style={Container.rowBtn}>
               <TouchableOpacity
@@ -171,12 +154,6 @@ export const NewPets = ({ navigation, route }) => {
     </KeyboardAvoidingView>
 
   );
-}
-
-const getNasc = (nasc) => {
-  if (nasc) {
-    return (`${nasc.getDate()} / ${nasc.getMonth()} / ${nasc.getFullYear()}`)
-  }
 }
 
 const showAlert = () =>{

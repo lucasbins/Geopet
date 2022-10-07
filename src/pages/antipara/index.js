@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
-import { useApi } from '../../hooks/useApi';
 
 import { styles } from './styles';
 
@@ -10,7 +9,7 @@ import { CardAnti } from '../../components/cards/cardAnti';
 
 export const Anti = ({navigation, route}) => {
   const pet = route.params.pet;
-  const anti = route.params.pet.anti;
+  const anti = route.params.pet.antiparasitario;
 
   const onPressNewAnti = () => {
     navigation.navigate('NewAnti', { pet: pet, acao: 'new' })
@@ -24,7 +23,7 @@ export const Anti = ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.list}>
-        {anti !== undefined && anti.map((anti,i) => {
+        {anti.length > 0 && anti.map((anti,i) => {
           return <CardAnti anti={anti} key={i} change={() => onPressDetailsAnti(anti)}/>
         })}
         <PlusButton change={onPressNewAnti}/>

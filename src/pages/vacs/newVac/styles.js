@@ -32,42 +32,11 @@ export const Container = StyleSheet.create({
     color: primaryColor,
     fontWeight: 'bold',
     marginTop: 15
-   },
-   saveButton: {
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: primaryColor,
-    padding: 5,
-    margin: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  cancelButton: {
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: '#cccccc',
-    padding: 5,
-    margin: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textBtn: {
-    fontSize: 18,
-    color: secondaryColor,
-  },
+   },  
   rowBtn:{
-    flexDirection: 'row'
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  deleteButton:{
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: '#f00',
-    padding: 5,
-    margin: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+  
 })

@@ -1,20 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
 
 import { styles } from './style';
 
 import PlusButton from '../../components/plusButton';
 import { CardVac } from '../../components/cards/cardVac';
-import AuthContext from '../../contexts/auth';
 
 export const Vacs = ({navigation, route}) => {
   const pet = route.params.pet
-  const [ vacs , setVacs] = useState([])
-  const auth = useContext(AuthContext)
-
-  useEffect(() => {
-    setVacs(route.params.pet.vacs)
-  },[auth.pet])
+  const vacs = route.params.pet.vacina
 
   const onPressNewVacs = () => {
     navigation.navigate('NewVac', { pet: pet, acao: 'new' })
@@ -28,7 +22,7 @@ export const Vacs = ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.list}>
-        {vacs !== undefined && vacs.map((vac,i) => {
+        {vacs.length > 0 && vacs.map((vac,i) => {
           return <CardVac vac={vac} key={i} change={() => onPressDetailsVacs(vac)}/>
         })}
         <PlusButton change={onPressNewVacs}/>

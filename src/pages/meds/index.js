@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
-import { useApi } from '../../hooks/useApi';
 
 import { styles } from './style';
 
@@ -9,7 +8,7 @@ import { CardMed } from '../../components/cards/cardMed';
 
 export const Meds = ({navigation, route}) => {
   const pet = route.params.pet
-  const meds = route.params.pet.meds;
+  const meds = route.params.pet.medicamento;
 
   const onPressNewMeds = () => {
     navigation.navigate('NewMed', { pet: pet, acao: 'new' })
@@ -23,7 +22,7 @@ export const Meds = ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.list}>
-        {meds !== undefined && meds.map((med,i) => {
+        {meds.length > 0 && meds.map((med,i) => {
           return <CardMed med={med} key={i} change={() => onPressDetailsMeds(med)}/>
         })}
         <PlusButton change={onPressNewMeds}/>

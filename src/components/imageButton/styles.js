@@ -9,8 +9,8 @@ export const Container = StyleSheet.create({
   image: {
     resizeMode: 'cover',
     marginTop: 20,
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     borderRadius: 100,
     borderWidth: 2,
     borderColor: primaryColor,

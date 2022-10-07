@@ -3,21 +3,22 @@ import { Image, Text, View, TouchableOpacity } from 'react-native';
 
 import { styles } from './style';
 
-export const CardVac = (params) => {
-  const vac = params.vac
+export const CardVac = ({vac,change}) => {
+  const data = getDate(vac.data.toDate().toJSON())
+  const proximaVacina = getDate(vac.proximaVacina.toDate().toJSON())
 
   return (
     <TouchableOpacity style={styles.card}
-    onPress={params.change}
+    onPress={change}
     >
       <View style={styles.line}>
         <View style={styles.name}>
           <Text style={styles.label}>Nome:</Text>
-          <Text style={styles.text}>{vac.name}</Text>
+          <Text style={styles.text}>{vac.nome}</Text>
           <Text style={styles.label}>Data:</Text>
-          <Text style={styles.text}>{getDate(vac.date.toDate())}</Text>
+          <Text style={styles.text}>{data}</Text>
           <Text style={styles.label}>Proxima:</Text>
-          <Text style={styles.text}>{getDate(vac.nextVac.toDate())}</Text>
+          <Text style={styles.text}>{proximaVacina}</Text>
         </View>
         <View>
           <Text style={styles.label}>Rotulo:</Text>
@@ -35,5 +36,6 @@ export const CardVac = (params) => {
 }
 
 const getDate= (date) => {
-  return (`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
+  const d = new Date(date)
+  return (`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`)
  }

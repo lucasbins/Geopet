@@ -8,8 +8,7 @@ export const Calendario = (params) => {
   const setDate = params.setDate
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setDate(currentDate);
+    setDate(selectedDate);
   };
 
   const showMode = (currentMode) => {

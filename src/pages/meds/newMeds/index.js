@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Text,
   View,
   TextInput,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
   Alert
 } from 'react-native';
-import { Container } from './styles';
 import { Calendario } from '../../../components/calendario';
+import { Button } from '../../../components/button';
+
 import { useApi } from '../../../hooks/useApi';
+import AuthContext from '../../../contexts/auth';
+
 import { Timestamp } from "firebase/firestore";
+import { uuidv4 } from "@firebase/util";
+
+import { Container } from './styles';
+
 
 export const NewMed = ({navigation,route}) => {
   const [ med, setMed ] = useState({
+    uuid: '',
     nome: '',
-    dataInicio: new Date(),
-    dataFim: new Date(),
+    dataInicio: Timestamp.now(),
+    dataFim: Timestamp.now(),
     intervalo: '',
     tipo: '',
     horario: ''
@@ -26,6 +33,7 @@ export const NewMed = ({navigation,route}) => {
   const [dataFim, setDataFim] = useState(new Date())
 
   const api = useApi();
+  const auth = useContext(AuthContext)
   
   useEffect(() => {
     if(route.params.acao == 'edit'){
@@ -33,7 +41,7 @@ export const NewMed = ({navigation,route}) => {
       setDataInicio(route.params.med.dataInicio.toDate())
       setDataFim(route.params.med.dataFim.toDate())
     }else if(route.params.acao == 'new'){
-      setMed({...med, pet_uid: route.params.pet.uuid})
+      setMed({...med, uuid: uuidv4()})
     }
   },[])
 
@@ -43,30 +51,58 @@ export const NewMed = ({navigation,route}) => {
 
   const handleSelectDataInicio = (date) => {
     setDateInicio(date)
+    setMed({...med, dataInicio: Timestamp.fromDate(date)})
   }
   const handleSelectDataFim = (date) => {
     setDataFim(date)
+    setMed({...med, dataFim: Timestamp.fromDate(date)})
   }
 
   const handleSaveMed = () => {
-    let docData = med;
-    docData.dataInicio = Timestamp.fromDate(dataInicio)
-    docData.dataFim = Timestamp.fromDate(dataFim)
+    let docData = route.params.pet;
     if(med){      
       if(route.params.acao === 'new'){
-        api.setMed(docData).then(() => {
-          showAlert()
-          auth.getPets(route.params.pet.user_uid)
-          navigation.navigate('Meds', {pet: route.params.pet})
-        })
+        docData.medicamento.push(med)
+        savePet(docData)
+        Alert.alert("Sucesso","Medicamento adicionado com sucesso!")
       }else if(route.params.acao === 'edit'){
-        api.updateMed(docData).then(() => {
-          showAlert()
-          auth.getPets(route.params.pet.user_uid)
-          navigation.navigate('Meds', {pet: route.params.pet})
+        docData.medicamento.map((medicamento, i) => {
+          if(medicamento.uuid == med.uuid){
+            docData.medicamento[i] = med;
+          }
         })
+        savePet(docData)
+        Alert.alert("Sucesso","Medicamento alterado com sucesso!")
       }
     }
+  }
+
+  const handleDeleteMed = () => {
+    Alert.alert("Cuidado", "Você tem certeza que quer deletar?", [
+      {
+        text: "Não",
+        style: "cancel"
+      },
+      {
+        text: "Sim",
+        onPress: () => {
+          let docData = route.params.pet;
+          docData.medicamento.map((medicamento, i) => {
+            if(medicamento.uuid == med.uuid){
+              docData.medicamento.splice(i,1);
+            }
+          })
+          savePet(docData)
+        }
+      }]
+    );
+  }
+
+  const savePet = async (docData) => {
+    await api.updatePet(docData).then(() => {
+      auth.getPets(route.params.pet.user_uid)
+      navigation.navigate('Meds', {pet: route.params.pet})
+    })
   }
 
   return (
@@ -84,19 +120,19 @@ export const NewMed = ({navigation,route}) => {
               <TextInput
                 style={Container.input}
                 value={med.tipo}
-                onChangeText={(text) => setMed({ ...med, nome: text })}
+                onChangeText={(text) => setMed({ ...med, tipo: text })}
               />
               <Text style={Container.label}>Intervalo de dias:</Text>
               <TextInput
                 style={Container.input}
                 value={med.intervalo}
-                onChangeText={(text) => setMed({ ...med, nome: text })}
+                onChangeText={(text) => setMed({ ...med, intervalo: text })}
               />
               <Text style={Container.label}>Horario:</Text>
               <TextInput
                 style={Container.input}
                 value={med.horario}
-                onChangeText={(text) => setMed({ ...med, nome: text })}
+                onChangeText={(text) => setMed({ ...med, horario: text })}
               />
               <Text style={Container.label}>Inicio do tratamento:</Text>
               <Calendario data={dataInicio} setDate={handleSelectDataInicio}/>
@@ -105,38 +141,13 @@ export const NewMed = ({navigation,route}) => {
             </View>
             <View style={Container.rowBtn}>
             {route.params.acao === 'edit' && 
-                <TouchableOpacity
-                  style={Container.deleteButton}
-                  accessibilityLabel="Deletar"
-                  onPress={handleCancel}
-                >
-                  <Text style={Container.textBtn}>Deletar</Text>
-                </TouchableOpacity>
+                <Button title="Deletar" callback={handleDeleteMed}/>
               }
-              <TouchableOpacity
-                style={Container.cancelButton}
-                accessibilityLabel="Cancelar"
-                onPress={handleCancel}
-              >
-                <Text style={Container.textBtn}>Cancelar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={Container.saveButton}
-                accessibilityLabel="Salvar"
-                onPress={handleSaveMed}
-              >
-                <Text style={Container.textBtn}>Salvar</Text>
-              </TouchableOpacity>
+                <Button title="Cancelar" callback={handleCancel}/>
+              <Button title="Salvar" callback={handleSaveMed}/>
             </View>
           </View>
       </ScrollView>
     </SafeAreaView>
     );
-}
-
-const showAlert = () =>{
-  Alert.alert(
-    "Sucesso",
-    "Medicamento adicionada com sucesso!",
-  );
 }

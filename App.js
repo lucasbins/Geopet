@@ -122,7 +122,7 @@ function App() {
             name='Anti'
             component={Anti}
             options={{
-              title: "AntiParasitario",
+              title: "Antiparasitario",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}
