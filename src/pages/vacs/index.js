@@ -6,7 +6,7 @@ import { styles } from './style';
 import PlusButton from '../../components/plusButton';
 import { CardVac } from '../../components/cards/cardVac';
 
-export const Vacs = ({navigation, route}) => {
+export const Vacs = ({ navigation, route }) => {
   const pet = route.params.pet
   const vacs = route.params.pet.vacina
 
@@ -15,19 +15,19 @@ export const Vacs = ({navigation, route}) => {
   }
 
   const onPressDetailsVacs = (vac) => {
-    navigation.navigate('NewVac', { pet: pet, vac: vac, acao: 'edit'})
-  } 
- 
+    navigation.navigate('NewVac', { pet: pet, vac: vac, acao: 'edit' })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.list}>
-        {vacs.length > 0 && vacs.map((vac,i) => {
-          return <CardVac vac={vac} key={i} change={() => onPressDetailsVacs(vac)}/>
-        })}
-        <PlusButton change={onPressNewVacs}/>
+          {vacs.length > 0 && vacs.map((vac, i) => {
+            return <CardVac vac={vac} key={i} change={() => onPressDetailsVacs(vac)} />
+          })}
         </View>
       </ScrollView>
+      <PlusButton change={onPressNewVacs} />
     </SafeAreaView>
   );
 }

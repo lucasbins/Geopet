@@ -50,6 +50,7 @@ export const useApi = () => ({
       pet.push(doc.data());
     })
     console.log('Buscou Pets')
+    AsyncStorage.setItem("PETS",JSON.stringify(pet))
     return pet
   },
   setPets: async (docData) => {

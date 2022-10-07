@@ -4,9 +4,6 @@ import { background, primaryColor, secondaryColor } from "../../config/stylesCol
 export const styles = StyleSheet.create({
   container:{
     backgroundColor: background,
-    flex: 1,
-  },
-  scrollView:{
-    flex: 1
+    height: '100%'
   },
 })

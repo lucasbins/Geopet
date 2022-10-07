@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, SafeAreaView, ScrollView } from 'react-native';
-import { useApi } from '../../hooks/useApi';
+import { View, SafeAreaView, ScrollView } from 'react-native';
 import AuthContext from '../../contexts/auth';
 
 import { styles } from './style';
@@ -27,13 +26,13 @@ export const Pets = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.list}>
+        <View>
         {pets !== undefined && pets.map((pet,i) => {
           return <CardPet pet={pet} key={i} change={onPressDetailsPets}/>
         })}
-        <PlusButton change={onPressNewPets}/>
         </View>
       </ScrollView>
+      <PlusButton change={onPressNewPets}/>
     </SafeAreaView>
   );
 }

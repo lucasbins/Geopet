@@ -20,8 +20,15 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     AsyncStorage.getItem("USER").then((USER) => {
-      const login = JSON.parse(USER)
-      if(login && auth.user){
+      const user = JSON.parse(USER)
+      if(user.uid){
+        auth.setUser(user.uid)
+        AsyncStorage.getItem("PETS").then((pets) => {
+          const pet = JSON.parse(pets)
+          if(pet)
+            auth.setPets(pet)
+        })
+        auth.setPets()
         navigation.navigate('Menu')
       }
     })
