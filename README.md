@@ -27,14 +27,19 @@ O sistema permite guardar as informações sobre vacinas, medicamentos e antipul
 ## Funcionalidade
 
 :heavy_check_mark: `Funcionalidade 1:` Realizar cadastro do pet.
+
 :heavy_check_mark: `Funcionalidade 2:` Realizar cadastro das vacinas, medicamento e antiparasitarios.
+
 :heavy_check_mark: `Funcionalidade 3:` Localizar estabelecimentos veterinarios.
 
 ## Acesso ao Projeto
 
 Pode ser acessado pelo aplicativo do Expo go atraves do link:
-<a>exp://exp.host/@lucasbins/geopet?release-channel=default</a>
+
+<a href="exp://exp.host/@lucasbins/geopet?release-channel=default">Link para expo</a>
+
 ou QRCODE:
+
 <a href="https://expo.dev/@lucasbins/geopet"><img src="https://cdn.discordapp.com/attachments/897996889495076938/1027956569318641704/unknown.png" alt="Geopet"></a>
 
 ## Desenvolvedor
