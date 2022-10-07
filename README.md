@@ -34,11 +34,7 @@ O sistema permite guardar as informações sobre vacinas, medicamentos e antipul
 
 ## Acesso ao Projeto
 
-Pode ser acessado pelo aplicativo do Expo go atraves do link:
-
-<a href="exp://exp.host/@lucasbins/geopet?release-channel=default">Link para expo</a>
-
-ou QRCODE:
+Pode ser acessado pelo aplicativo do Expo go atraves do QRCODE:
 
 <a href="https://expo.dev/@lucasbins/geopet"><img src="https://cdn.discordapp.com/attachments/897996889495076938/1027956569318641704/unknown.png" alt="Geopet"></a>
 
