@@ -37,8 +37,10 @@ export const NewVac = ({ navigation, route }) => {
   useEffect(() => {
     if (route.params.acao == 'edit') {
       setVac(route.params.vac)
-      setDateVac(route.params.vac.data.toDate())
-      setNextVac(route.params.vac.proximaVacina.toDate())
+      var data = route.params.vac.data
+      setDateVac(new Timestamp(data.seconds,data.nanoseconds).toDate())
+      var proxVacina = route.params.vac.proximaVacina
+      setNextVac(new Timestamp(proxVacina.seconds,proxVacina.nanoseconds).toDate())
     } else if (route.params.acao == 'new') {
       setVac({ ...vac, uuid: uuidv4() })
     }

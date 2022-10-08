@@ -39,8 +39,10 @@ export const NewAnti = ({ navigation, route }) => {
   useEffect(() => {
     if (route.params.acao == 'edit') {
       setAnti(route.params.anti)
-      setDataInicio(route.params.anti.dataInicio.toDate())
-      setDataFim(route.params.anti.dataFim.toDate())
+      var ini = route.params.anti.dataInicio
+      setDataInicio(new Timestamp(ini.seconds,ini.nanoseconds).toDate())
+      var fim = route.params.anti.dataFim
+      setDataFim(new Timestamp(fim.seconds,fim.nanoseconds).toDate())
     } else if (route.params.acao == 'new') {
       setAnti({ ...anti, uuid: uuidv4() })
     }
@@ -51,12 +53,12 @@ export const NewAnti = ({ navigation, route }) => {
   }
 
   const handleSelectDataInicio = (date) => {
-    setDateInicio(date)
+    setDataInicio(date)
     setAnti({ ...anti, dataInicio: Timestamp.fromDate(date) })
   }
   const handleSelectDataFim = (date) => {
     setDataFim(date)
-    setAnti({ ...anti, dataInicio: Timestamp.fromDate(date) })
+    setAnti({ ...anti, dataFim: Timestamp.fromDate(date) })
   }
 
   const handleSaveAnti = () => {
@@ -102,8 +104,9 @@ export const NewAnti = ({ navigation, route }) => {
   const savePet = async (docData) => {
     await api.updatePet(docData).then(() => {
       auth.getPets(route.params.pet.user_uid)
-      navigation.navigate('Anti', { pet: route.params.pet })
     })
+    console.log('alterou')
+    navigation.navigate('Anti', { pet: route.params.pet })
   }
 
   return (

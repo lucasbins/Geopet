@@ -38,8 +38,10 @@ export const NewMed = ({navigation,route}) => {
   useEffect(() => {
     if(route.params.acao == 'edit'){
       setMed(route.params.med)
-      setDataInicio(route.params.med.dataInicio.toDate())
-      setDataFim(route.params.med.dataFim.toDate())
+      var ini = route.params.med.dataInicio
+      setDataInicio(new Timestamp(ini.seconds,ini.nanoseconds).toDate())
+      var fim = route.params.med.dataFim
+      setDataFim(new Timestamp(fim.seconds,fim.nanoseconds).toDate())
     }else if(route.params.acao == 'new'){
       setMed({...med, uuid: uuidv4()})
     }
