@@ -26,7 +26,7 @@ export const Menu = ({navigation}) => {
 
   const onPressLogout = () => {
     auth.logout()
-    navigation.navigate('Login')
+    navigation.navigate('LandingPage')
   }
 
   return (

@@ -19,6 +19,7 @@ import { NewAnti } from './src/pages/antipara/newAntipara';
 import { Agenda } from './src/pages/agenda';
 
 import { AuthProvider } from './src/contexts/auth';
+import { LandingPage } from './src/pages/landingPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,12 @@ function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'Login'}>
+        <Stack.Navigator initialRouteName={'LandingPage'}>
+        <Stack.Screen
+            name='LandingPage'
+            component={LandingPage}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name='Login'
             component={Login}

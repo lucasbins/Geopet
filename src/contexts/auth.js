@@ -20,7 +20,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async ( ) => {
-    api.signOut()
+    setUser(null)
+    setPets(null)
+    await api.signOut()
   }
 
   const getPets = async (uid) => {

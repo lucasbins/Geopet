@@ -12,7 +12,6 @@ export const Pets = ({navigation}) => {
   const auth = useContext(AuthContext)
 
   useEffect(() => {
-    console.log(auth.pets[0].nascimento)
     setPets(auth.pets)
   }, [auth.pets])
 

@@ -39,6 +39,8 @@ target 'helpPet' do
 
   pod 'RealmJS', :path => '../node_modules/realm'
 
+  pod 'react-native-progress-bar-android', :path => '../node_modules/@react-native-community/progress-bar-android'
+
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)

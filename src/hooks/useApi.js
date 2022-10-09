@@ -37,6 +37,7 @@ export const useApi = () => ({
   signOut: async () => {
     try{
       await AsyncStorage.removeItem("USER")
+      AsyncStorage.removeItem("PETS")
       console.log('usuario removido')
     }catch(e){
       console.log(e)

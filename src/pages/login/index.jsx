@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import styles from './style';
 import AuthContext from '../../contexts/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -17,22 +16,6 @@ export const Login = ({ navigation }) => {
   const [error, setError] = useState(false);
 
   const auth = useContext(AuthContext)
-
-  useEffect(() => {
-    AsyncStorage.getItem("USER").then((USER) => {
-      const user = JSON.parse(USER)
-      if(user.uid){
-        auth.setUser(user.uid)
-        AsyncStorage.getItem("PETS").then((pets) => {
-          const pet = JSON.parse(pets)
-          if(pet)
-            auth.setPets(pet)
-        })
-        auth.setPets()
-        navigation.navigate('Menu')
-      }
-    })
-  },[])
 
   const handleSignIn = async () => {
     try {
@@ -52,14 +35,14 @@ export const Login = ({ navigation }) => {
       style={styles.background}>
       <View style={styles.containerLogo}>
           <Image style={styles.logo}
-            source={require('../../assets/img/Logo_icon.png')} />
+            source={require('../../assets/img/Logo.png')} />
       </View>
 
       <View style={styles.container}>
         <TextInput
           style={styles.input}
           placeholder='enter your email'
-          type='text'
+          type='email'
           value={email}
           onChangeText={(text) => {
             setEmail(text)

@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import styles  from './style';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -13,7 +14,7 @@ import { initializeApp } from '@firebase/app';
 import { firebaseConfig } from '../../../config/firebaseconfig';
 // import { Container } from './styles';
 
-export const NewUser = () => {
+export const NewUser = ({navigation}) => {
   const [ email , setEmail] = useState("");
   const [ password, setPassword] = useState("");
   const [ error, setError] = useState(false);
@@ -24,9 +25,10 @@ export const NewUser = () => {
   const handleSignIn = () => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Account created!')
-      const user = userCredential.user;
-      console.log(user)
+      if(userCredential){
+        Alert.alert("Sucesso", "Conta criada com sucesso!")
+        navigation.navigate('Login')
+      }
     })
     .catch((error) => {
       console.log(error)
@@ -75,7 +77,7 @@ export const NewUser = () => {
           disabled={true}
           style={styles.createAccountButton}
         >
-          <Text style={styles.textButtonCreateAccount}>Create Account</Text>
+          <Text style={styles.textButtonCreateAccount}>Criar conta</Text>
         </TouchableOpacity>
       :
       <TouchableOpacity 
