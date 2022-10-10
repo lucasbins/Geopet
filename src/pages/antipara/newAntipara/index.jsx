@@ -23,8 +23,8 @@ export const NewAnti = ({ navigation, route }) => {
   const [anti, setAnti] = useState({
     uuid: '',
     fabricante: '',
-    dataInicio: Timestamp.now(),
-    dataFim: Timestamp.now(),
+    dataInicio: new Date().toJSON(),
+    dataFim: new Date().toJSON(),
     intervalo: '',
     tipo: '',
     horario: '',
@@ -39,10 +39,8 @@ export const NewAnti = ({ navigation, route }) => {
   useEffect(() => {
     if (route.params.acao == 'edit') {
       setAnti(route.params.anti)
-      var ini = route.params.anti.dataInicio
-      setDataInicio(new Timestamp(ini.seconds,ini.nanoseconds).toDate())
-      var fim = route.params.anti.dataFim
-      setDataFim(new Timestamp(fim.seconds,fim.nanoseconds).toDate())
+      setDataInicio(new Date(route.params.anti.dataInicio))
+      setDataFim(new Date(route.params.anti.dataFim))
     } else if (route.params.acao == 'new') {
       setAnti({ ...anti, uuid: uuidv4() })
     }
@@ -54,11 +52,11 @@ export const NewAnti = ({ navigation, route }) => {
 
   const handleSelectDataInicio = (date) => {
     setDataInicio(date)
-    setAnti({ ...anti, dataInicio: Timestamp.fromDate(date) })
+    setAnti({ ...anti, dataInicio: date.toJSON() })
   }
   const handleSelectDataFim = (date) => {
     setDataFim(date)
-    setAnti({ ...anti, dataFim: Timestamp.fromDate(date) })
+    setAnti({ ...anti, dataFim: date.toJSON() })
   }
 
   const handleSaveAnti = () => {

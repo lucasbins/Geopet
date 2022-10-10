@@ -13,7 +13,6 @@ import { Button } from '../../../components/button';
 import { useApi } from '../../../hooks/useApi';
 import AuthContext from '../../../contexts/auth';
 
-import { Timestamp } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
 
 import { Container } from './styles';
@@ -23,8 +22,8 @@ export const NewMed = ({navigation,route}) => {
   const [ med, setMed ] = useState({
     uuid: '',
     nome: '',
-    dataInicio: Timestamp.now(),
-    dataFim: Timestamp.now(),
+    dataInicio: new Date().toJSON(),
+    dataFim: new Date().toJSON(),
     intervalo: '',
     tipo: '',
     horario: ''
@@ -38,10 +37,8 @@ export const NewMed = ({navigation,route}) => {
   useEffect(() => {
     if(route.params.acao == 'edit'){
       setMed(route.params.med)
-      var ini = route.params.med.dataInicio
-      setDataInicio(new Timestamp(ini.seconds,ini.nanoseconds).toDate())
-      var fim = route.params.med.dataFim
-      setDataFim(new Timestamp(fim.seconds,fim.nanoseconds).toDate())
+      setDataInicio(new Date(route.params.med.dataInicio))
+      setDataFim(new Date(route.params.med.dataFim))
     }else if(route.params.acao == 'new'){
       setMed({...med, uuid: uuidv4()})
     }
@@ -52,12 +49,12 @@ export const NewMed = ({navigation,route}) => {
   }
 
   const handleSelectDataInicio = (date) => {
-    setDateInicio(date)
-    setMed({...med, dataInicio: Timestamp.fromDate(date)})
+    setDataInicio(date)
+    setMed({...med, dataInicio: date.toJSON()})
   }
   const handleSelectDataFim = (date) => {
     setDataFim(date)
-    setMed({...med, dataFim: Timestamp.fromDate(date)})
+    setMed({...med, dataFim: date.toJSON()})
   }
 
   const handleSaveMed = () => {

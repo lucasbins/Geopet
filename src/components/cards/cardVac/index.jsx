@@ -1,12 +1,9 @@
-import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
 
 import { styles } from './style';
 
 export const CardVac = ({vac,change}) => {
-  const data = new Timestamp(vac.data.seconds,vac.data.nanoseconds)
-  const proximaVacina = new Timestamp(vac.proximaVacina.seconds,vac.proximaVacina.nanoseconds)
 
   return (
     <TouchableOpacity style={styles.card}
@@ -17,9 +14,9 @@ export const CardVac = ({vac,change}) => {
           <Text style={styles.label}>Nome:</Text>
           <Text style={styles.text}>{vac.nome}</Text>
           <Text style={styles.label}>Data:</Text>
-          <Text style={styles.text}>{getDate(data.toDate())}</Text>
+          <Text style={styles.text}>{getDate(vac.data)}</Text>
           <Text style={styles.label}>Proxima:</Text>
-          <Text style={styles.text}>{getDate(proximaVacina.toDate())}</Text>
+          <Text style={styles.text}>{getDate(vac.proximaVacina)}</Text>
         </View>
         <View>
           <Text style={styles.label}>Rotulo:</Text>

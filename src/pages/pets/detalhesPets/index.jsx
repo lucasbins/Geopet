@@ -12,13 +12,12 @@ import { RowButtons } from '../../../components/rowButtons';
 import { container } from './styles';
 import { useApi } from '../../../hooks/useApi';
 import AuthContext from '../../../contexts/auth';
-import { Timestamp } from "firebase/firestore";
 
 export const DetalhesPets = ({ navigation, route }) => {
   const pet = route.params.pet;
   const api = useApi()
   const auth = useContext(AuthContext)
-  const nasc = new Timestamp(pet.nascimento.seconds,pet.nascimento.nanoseconds)
+  const nasc = new Date(pet.nascimento)
 
   const handleDelete = (uuid) => {
     Alert.alert("Cuidado", "Você tem certeza que quer deletar?", [
@@ -110,8 +109,7 @@ export const DetalhesPets = ({ navigation, route }) => {
 const getIdade = (nasc) => {
   var d = new Date()
   if (nasc) {
-    const data = nasc.toDate()
-    return calculaIdade(data, d)
+    return calculaIdade(nasc, d)
   }
 }
 

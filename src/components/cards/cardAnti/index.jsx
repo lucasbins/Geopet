@@ -1,13 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { Timestamp } from 'firebase/firestore';
 
 import { styles } from './styles';
 
 export const CardAnti = ({anti, change}) => {
-  const dataInicio = new Timestamp(anti.dataInicio.seconds,anti.dataInicio.nanoseconds)
-  const dataFim = new Timestamp(anti.dataFim.seconds,anti.dataFim.nanoseconds)
-
   return (
     <TouchableOpacity style={styles.card}
     onPress={change}
@@ -19,9 +15,9 @@ export const CardAnti = ({anti, change}) => {
           <Text style={styles.label}>Tipo:</Text>
           <Text style={styles.text}>{anti.tipo}</Text>
           <Text style={styles.label}>Inicio do tratamento:</Text>
-          <Text style={styles.text}>{getDate(dataInicio.toDate())}</Text>
+          <Text style={styles.text}>{getDate(anti.dataInicio)}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>
-          <Text style={styles.text}>{getDate(dataFim.toDate())}</Text>
+          <Text style={styles.text}>{getDate(anti.dataFim)}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -29,5 +25,6 @@ export const CardAnti = ({anti, change}) => {
 }
 
 const getDate= (date) => {
- return (`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
+  const d= new Date(date)
+  return (`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`)
 }

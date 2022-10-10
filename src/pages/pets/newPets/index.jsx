@@ -20,7 +20,6 @@ import { useApi } from '../../../hooks/useApi';
 import { Container } from './styles';
 import { ImageButton } from '../../../components/imageButton';
 import { Calendario } from '../../../components/calendario';
-import { Button } from '../../../components/button';
 
 export const NewPets = ({ navigation, route }) => {
   const params = route.params
@@ -29,7 +28,7 @@ export const NewPets = ({ navigation, route }) => {
     nome: '',
     raca: '',
     porte: '',
-    nascimento: Timestamp.now(),
+    nascimento: new Date(),
     peso: '',
     vacina: [],
     medicamento: [],
@@ -44,14 +43,14 @@ export const NewPets = ({ navigation, route }) => {
   useEffect(() => {
     if (params.acao == 'edit') {
       setPet(params.pet)
-      setDate(params.pet.nascimento.toDate())
+      setDate(new Date(params.pet.nascimento))
       setImage(params.pet.avatar)
     }
   }, [])
 
   const handleSelectNascimento = (date) => {
     setDate(date);
-    setPet({...pet, nascimento: Timestamp.fromDate(date)})
+    setPet({...pet, nascimento: date.toJSON()})
   };
 
   const pickImage = async () => {

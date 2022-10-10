@@ -24,8 +24,8 @@ export const NewVac = ({ navigation, route }) => {
   const [vac, setVac] = useState({
     uuid: '',
     nome: '',
-    data: Timestamp.now(),
-    proximaVacina: Timestamp.now(),
+    data: new Date().toJSON(),
+    proximaVacina: new Date().toJSON(),
     rotulo: ''
   })
   const [dateVac, setDateVac] = useState(new Date())
@@ -37,10 +37,8 @@ export const NewVac = ({ navigation, route }) => {
   useEffect(() => {
     if (route.params.acao == 'edit') {
       setVac(route.params.vac)
-      var data = route.params.vac.data
-      setDateVac(new Timestamp(data.seconds,data.nanoseconds).toDate())
-      var proxVacina = route.params.vac.proximaVacina
-      setNextVac(new Timestamp(proxVacina.seconds,proxVacina.nanoseconds).toDate())
+      setDateVac(new Date(route.params.vac.data))
+      setNextVac(new Date(route.params.vac.proximaVacina))
     } else if (route.params.acao == 'new') {
       setVac({ ...vac, uuid: uuidv4() })
     }
@@ -52,11 +50,11 @@ export const NewVac = ({ navigation, route }) => {
 
   const handleSelectDate = (date) => {
     setDateVac(date)
-    setVac({ ...vac, data: Timestamp.fromDate(date) })
+    setVac({ ...vac, data: date.toJSON() })
   }
   const handleSelectNextVac = (date) => {
     setNextVac(date)
-    setVac({ ...vac, proximaVacina: Timestamp.fromDate(date) })
+    setVac({ ...vac, proximaVacina: date.toJSON() })
   }
 
   const pickImage = async () => {
