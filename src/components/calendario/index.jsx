@@ -13,6 +13,7 @@ export const Calendario = (params) => {
 
   const showMode = (currentMode) => {
     DateTimePickerAndroid.open({
+      display: 'spinner',
       value: date,
       onChange,
       mode: currentMode,

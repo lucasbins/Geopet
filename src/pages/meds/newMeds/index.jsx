@@ -30,6 +30,7 @@ export const NewMed = ({navigation,route}) => {
   })
   const [dataInicio, setDataInicio] = useState(new Date())
   const [dataFim, setDataFim] = useState(new Date())
+  const [horario, setHorario] = useState(new Date())
 
   const api = useApi();
   const auth = useContext(AuthContext)

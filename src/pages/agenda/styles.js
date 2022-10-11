@@ -7,13 +7,29 @@ export const Container = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    flex: 1,
     width: '100%',
   },
   view: {
-    flex: 1,
     alignItems: 'center',
     margin: 10,
     padding: 10
   },
+  list: {
+    margin: 15,
+    padding: 15,
+    borderColor: primaryColor,
+    borderWidth: 1.5,
+    borderTopLeftRadius: 10,
+    backgroundColor: '#fff'
+  },
+  textTitle:{
+    fontSize: 19,
+    color: primaryColor,
+    fontWeight: 'bold'
+  },
+  button:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }
 })
