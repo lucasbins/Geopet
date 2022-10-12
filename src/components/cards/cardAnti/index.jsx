@@ -15,16 +15,18 @@ export const CardAnti = ({anti, change}) => {
           <Text style={styles.label}>Tipo:</Text>
           <Text style={styles.text}>{anti.tipo}</Text>
           <Text style={styles.label}>Inicio do tratamento:</Text>
-          <Text style={styles.text}>{getDate(anti.dataInicio)}</Text>
+          <Text style={styles.text}>{formataData(anti.dataInicio)}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>
-          <Text style={styles.text}>{getDate(anti.dataFim)}</Text>
+          <Text style={styles.text}>{formataData(anti.dataFim)}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 }
 
-const getDate= (date) => {
-  const d= new Date(date)
-  return (`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`)
+const formataData = (date) => {
+  const d = new Date(date)
+  const dia = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`
+  const mes = d.getMonth()+1 < 10 ? `0${d.getMonth() +1}` : `${d.getMonth()+1}`
+  return (dia + "/" + mes + `/${d.getFullYear()}`)
 }

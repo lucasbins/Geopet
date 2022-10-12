@@ -50,7 +50,9 @@ export const CardAgenda = ({ data }) => {
 
 const formataData = (date) => {
   const d = new Date(date)
-  return (`${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`)
+  const dia = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`
+  const mes = d.getMonth()+1 < 10 ? `0${d.getMonth() +1}` : `${d.getMonth()+1}`
+  return (dia + "/" + mes + `/${d.getFullYear()}`)
 }
 
 const calculaData = (date) => {

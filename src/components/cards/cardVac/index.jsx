@@ -14,9 +14,9 @@ export const CardVac = ({vac,change}) => {
           <Text style={styles.label}>Nome:</Text>
           <Text style={styles.text}>{vac.nome}</Text>
           <Text style={styles.label}>Data:</Text>
-          <Text style={styles.text}>{getDate(vac.data)}</Text>
+          <Text style={styles.text}>{formataData(vac.data)}</Text>
           <Text style={styles.label}>Proxima:</Text>
-          <Text style={styles.text}>{getDate(vac.proximaVacina)}</Text>
+          <Text style={styles.text}>{formataData(vac.proximaVacina)}</Text>
         </View>
         <View>
           <Text style={styles.label}>Rotulo:</Text>
@@ -33,7 +33,9 @@ export const CardVac = ({vac,change}) => {
   );
 }
 
-const getDate= (date) => {
+const formataData = (date) => {
   const d = new Date(date)
-  return (`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`)
- }
+  const dia = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`
+  const mes = d.getMonth()+1 < 10 ? `0${d.getMonth() +1}` : `${d.getMonth()+1}`
+  return (dia + "/" + mes + `/${d.getFullYear()}`)
+}

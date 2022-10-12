@@ -14,16 +14,18 @@ export const CardMed = ({med, change}) => {
           <Text style={styles.label}>Nome:</Text>
           <Text style={styles.text}>{med.nome}</Text>
           <Text style={styles.label}>Inicio do tratamento:</Text>
-          <Text style={styles.text}>{getDate(med.dataInicio)}</Text>
+          <Text style={styles.text}>{formataData(med.dataInicio)}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>
-          <Text style={styles.text}>{getDate(med.dataFim)}</Text>
+          <Text style={styles.text}>{formataData(med.dataFim)}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 }
 
-const getDate= (date) => {
+ const formataData = (date) => {
   const d = new Date(date)
-  return (`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`)
- }
+  const dia = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`
+  const mes = d.getMonth()+1 < 10 ? `0${d.getMonth() +1}` : `${d.getMonth()+1}`
+  return (dia + "/" + mes + `/${d.getFullYear()}`)
+}

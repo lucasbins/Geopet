@@ -13,7 +13,6 @@ export const Calendario = (params) => {
 
   const showMode = (currentMode) => {
     DateTimePickerAndroid.open({
-      display: 'spinner',
       value: date,
       onChange,
       mode: currentMode,
@@ -25,15 +24,16 @@ export const Calendario = (params) => {
     showMode('date');
   };
 
-  const getDate = (nasc) => {
-    if (nasc) {
-      return (`${nasc.getDate()} / ${nasc.getMonth()+1} / ${nasc.getFullYear()}`)
-    }
+  const formataData = (date) => {
+    const d = new Date(date)
+    const dia = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`
+    const mes = d.getMonth()+1 < 10 ? `0${d.getMonth() +1}` : `${d.getMonth()+1}`
+    return (dia + "/" + mes + `/${d.getFullYear()}`)
   }
 
   return (
     <TouchableOpacity onPress={showDatepicker}>
-      <Text style={Container.input}>{getDate(date)}</Text>
+      <Text style={Container.input}>{formataData(date)}</Text>
     </TouchableOpacity>
   );
-}
+} 

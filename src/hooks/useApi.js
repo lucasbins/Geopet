@@ -5,13 +5,10 @@ import {
   where,
   getDocs,
   getFirestore,
-  initializeFirestore,
-  CACHE_SIZE_UNLIMITED,
   doc,
   setDoc,
   updateDoc,
   deleteDoc,
-  collectionGroup,
 } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth, app } from "../config/auth";

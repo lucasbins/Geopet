@@ -13,7 +13,6 @@ import { Container } from './styles';
 
 import { Calendario } from '../../../components/calendario';
 import { ImageButton } from '../../../components/imageButton';
-import { Timestamp } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
 
 import { useApi } from '../../../hooks/useApi';
