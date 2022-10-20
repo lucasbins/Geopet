@@ -41,7 +41,7 @@ export const LandingPage = ({ navigation }) => {
     <View style={Container.container}>
       <View style={Container.containerLogo}>
         <Image style={Container.logo}
-          source={require('../../assets/img/Logo_icon.png')} />
+          source={require('../../assets/img/logoIcon.png')} />
       </View>
       <View style={Container.loading}>
         <ActivityIndicator size={'large'} color={'#67C7C3'} />

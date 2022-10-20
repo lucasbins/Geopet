@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { 
   collection,
   query,
@@ -9,6 +9,7 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  
 } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth, app } from "../config/auth";
@@ -39,6 +40,9 @@ export const useApi = () => ({
     }catch(e){
       console.log(e)
     }
+  },
+  recoveryPassword: async (email) => {
+    return await sendPasswordResetEmail(auth, email)
   },
   getPets: async (user_uid) => {
     const q = query(collection(db, "pets"), where("user_uid", "==", user_uid));

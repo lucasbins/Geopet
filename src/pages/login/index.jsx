@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import AuthContext from '../../contexts/auth';
@@ -24,8 +25,18 @@ export const Login = ({ navigation }) => {
         navigation.navigate('Menu')
       else
         setError(true)
-    } catch(error) {
+    } catch (error) {
       setError(true)
+    }
+  }
+
+  const handleRecovery = async () => {
+    try {
+      await auth.recovery(email)
+      Alert.alert("Sucesso", "Solicitação enviada.")
+    }catch (e){
+      console.log(e)
+      Alert.alert("Erro", "Email não cadastrado.")
     }
   }
 
@@ -34,8 +45,8 @@ export const Login = ({ navigation }) => {
       behavior={"height"}
       style={styles.background}>
       <View style={styles.containerLogo}>
-          <Image style={styles.logo}
-            source={require('../../assets/img/Logo.png')} />
+        <Image style={styles.logo}
+          source={require('../../assets/img/Logo.png')} />
       </View>
 
       <View style={styles.container}>
@@ -66,6 +77,11 @@ export const Login = ({ navigation }) => {
             <Text style={styles.warningAlert}>Invalid e-mail or password</Text>
           </View>
         }
+        <TouchableOpacity 
+          style={styles.recovery}
+          onPress={handleRecovery}>
+          <Text style={styles.label}>Recuperar senha</Text>
+        </TouchableOpacity>
 
         {email === "" || password === "" ?
           <TouchableOpacity

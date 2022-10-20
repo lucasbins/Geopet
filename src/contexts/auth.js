@@ -32,9 +32,12 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const recovery = async (email) => {
+    return await api.recoveryPassword(email)
+  }
   
   return (
-    <AuthContext.Provider value={{user,setUser,setPets, signIn, logout, pets, getPets }}>
+    <AuthContext.Provider value={{user,setUser,setPets, signIn, logout, pets, getPets, recovery }}>
       {children}
     </AuthContext.Provider>
   )

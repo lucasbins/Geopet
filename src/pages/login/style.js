@@ -79,6 +79,15 @@ const styles = StyleSheet.create({
   warningAlert: {
     color: 'red',
   },
+  label: {
+    marginTop: 5,
+    color: secondaryColor
+  },
+  recovery: {
+    alignItems: 'center',
+    width: 300,
+    alignItems: 'flex-end'
+  }
 });
 
 export default styles;
