@@ -32,6 +32,15 @@ export const Button = ({title, callback}) => {
           <Text style={Container.textBtn}>{title}</Text>
         </TouchableOpacity>
       )
+    case "Filtrar":
+      return (
+        <TouchableOpacity 
+          style={Container.filterButton}
+          accessibilityLabel={title} 
+          onPress={callback}>
+          <Text style={{fontSize: 18, color: '#fff'}}>{title}</Text>
+        </TouchableOpacity>
+      )
   }
   
 }

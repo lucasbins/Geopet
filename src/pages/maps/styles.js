@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    height: '100%'
   },
   background: {
     flex:1,
@@ -15,4 +16,9 @@ export const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  pin:{
+    resizeMode: 'cover',
+    width: 30,
+    height: 43,
+  }
 });

@@ -36,4 +36,15 @@ export const Container = StyleSheet.create({
     fontSize: 18,
     color: secondaryColor,
   },
+  filterButton: {
+    width: 100,
+    height: 50,
+    borderRadius: 100,
+    backgroundColor: primaryColor,
+    position: 'absolute',
+    left: 15,
+    top: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
