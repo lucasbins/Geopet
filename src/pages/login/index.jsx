@@ -52,7 +52,7 @@ export const Login = ({ navigation }) => {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder='enter your email'
+          placeholder='E-mail'
           type='email'
           value={email}
           onChangeText={(text) => {
@@ -64,7 +64,7 @@ export const Login = ({ navigation }) => {
         <TextInput
           style={styles.input}
           secureTextEntry={true}
-          placeholder='enter a password'
+          placeholder='Senha'
           type='text'
           value={password}
           onChangeText={(text) => {
@@ -74,7 +74,7 @@ export const Login = ({ navigation }) => {
         />
         {error === true &&
           <View style={styles.contentAlert}>
-            <Text style={styles.warningAlert}>Invalid e-mail or password</Text>
+            <Text style={styles.warningAlert}>E-mail ou senha incorreto!</Text>
           </View>
         }
         <TouchableOpacity 
@@ -100,7 +100,7 @@ export const Login = ({ navigation }) => {
         }
         <View style={styles.division}>
           <View style={styles.line} />
-          <Text style={styles.textDivision}>Or</Text>
+          <Text style={styles.textDivision}>Ou</Text>
           <View style={styles.line} />
         </View>
 
@@ -108,7 +108,7 @@ export const Login = ({ navigation }) => {
           style={styles.createAccountButton}
           onPress={() => navigation.navigate('NewUser')}
         >
-          <Text style={styles.textButtonCreateAccount}>Create Account</Text>
+          <Text style={styles.textButtonCreateAccount}>Criar conta</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

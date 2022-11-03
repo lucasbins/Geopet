@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import { Container } from './styles';
 
-export const Button = ({title, callback}) => {
+export const Button = ({title,text, callback}) => {
   switch(title){
     case "Salvar":
       return (
@@ -40,6 +40,16 @@ export const Button = ({title, callback}) => {
           onPress={callback}>
           <Text style={{fontSize: 18, color: '#fff'}}>{title}</Text>
         </TouchableOpacity>
+      )
+    case "faq":
+      return (
+        <TouchableOpacity
+        style={Container.faqButton}
+        onPress={callback}
+        >
+        <Text style={Container.textFaq}>{text}</Text>
+        <Text style={Container.textFaq}>{">"}</Text>
+      </TouchableOpacity>
       )
   }
   

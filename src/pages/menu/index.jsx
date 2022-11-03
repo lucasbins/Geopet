@@ -23,6 +23,9 @@ export const Menu = ({navigation}) => {
   const onPressAgenda = () => {
     navigation.navigate('Agenda')
   }
+  const onPressFaq = () => {
+    navigation.navigate('FAQ')
+  }
 
   const onPressLogout = () => {
     auth.logout()
@@ -43,9 +46,9 @@ export const Menu = ({navigation}) => {
           <ButtonMenu icon={"agenda"} onPress={onPressAgenda} title={'Agenda'}/>
           <TouchableOpacity
             style={styles.btnLogout}
-            onPress={onPressLogout}
+            onPress={onPressFaq}
           >
-            <Text style={styles.logout}>Sair</Text>
+            <Text style={styles.logout}>Ajuda</Text>
           </TouchableOpacity>
         </View>
       </View>

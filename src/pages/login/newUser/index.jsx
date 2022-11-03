@@ -46,7 +46,7 @@ export const NewUser = ({navigation}) => {
 
       <TextInput
         style={styles.input}
-        placeholder='enter your email'
+        placeholder='E-mail'
         type='text'
         value={email}
         onChangeText={(text) => {
@@ -58,7 +58,7 @@ export const NewUser = ({navigation}) => {
       <TextInput
         style={styles.input}
         secureTextEntry={true}
-        placeholder='enter a password'
+        placeholder='Senha'
         type='text'
         value={password}
         onChangeText={(text) => {
@@ -68,7 +68,7 @@ export const NewUser = ({navigation}) => {
       />
       {error === true && 
       <View style={styles.contentAlert}>
-        <Text style={styles.warningAlert}>Invalid e-mail or password</Text>
+        <Text style={styles.warningAlert}>E-mail ou senha invalidos!</Text>
       </View>
       }
 
@@ -84,7 +84,7 @@ export const NewUser = ({navigation}) => {
         style={styles.createAccountButton}
         onPress={handleSignIn}
         >
-        <Text style={styles.textButtonCreateAccount}>Create Account</Text>
+        <Text style={styles.textButtonCreateAccount}>Criar conta</Text>
       </TouchableOpacity>
       }
     </KeyboardAvoidingView>

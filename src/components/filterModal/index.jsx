@@ -26,13 +26,13 @@ export const FilterModal = ({ modalVisible, setModalVisible }) => {
   return (
     <View style={Container.centeredView}>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
+        
       >
         <View style={Container.centeredView}>
           <View style={Container.modalView}>
@@ -62,7 +62,7 @@ export const FilterModal = ({ modalVisible, setModalVisible }) => {
               style={Container.button}
               onPress={() => setModalVisible(params)}
             >
-              <Text style={Container.textStyle}>Filtrar</Text>
+              <Text style={Container.textStyle}>Buscar</Text>
             </Pressable>
           </View>
         </View>

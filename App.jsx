@@ -17,6 +17,7 @@ import { NewMed } from './src/pages/meds/newMeds';
 import { Anti } from './src/pages/antipara';
 import { NewAnti } from './src/pages/antipara/newAntipara';
 import { Agenda } from './src/pages/agenda';
+import { Faq } from './src/pages/faq';
 
 import { AuthProvider } from './src/contexts/auth';
 import { LandingPage } from './src/pages/landingPage';
@@ -147,6 +148,15 @@ function App() {
             component={Agenda}
             options={{
               title: "Agenda",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='FAQ'
+            component={Faq}
+            options={{
+              title: "Ajuda",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}

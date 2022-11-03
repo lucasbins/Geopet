@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 
 import { Container } from './styles';
 
-export const CardAgenda = ({ data }) => {
+export const CardAgenda = ({data}) => {
   const agendas = priorizaData(data)
 
   return (
@@ -12,17 +12,21 @@ export const CardAgenda = ({ data }) => {
         switch (agenda.tipo) {
           case "vac":
             return (
-              <View style={calculaData(agenda.vac.proximaVacina) ? Container.list : Container.listWarning } key={i}>
+              <Pressable 
+                style={calculaData(agenda.vac.proximaVacina) ? Container.list : Container.listWarning } 
+                key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
                   <Text style={Container.text}>Vacina: {agenda.vac.nome}</Text>
                 </View>
                 <Text style={Container.textTitle}>Data: {formataData(agenda.vac.proximaVacina)}</Text>
-              </View>
+              </Pressable>
             )
           case "med":
             return (
-              <View style={calculaData(agenda.med.dataFim) ? Container.list : Container.listWarning } key={i}>
+              <Pressable 
+                style={calculaData(agenda.med.dataFim) ? Container.list : Container.listWarning } 
+                key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
                   <Text style={Container.textTitle}>Rémedio: {agenda.med.nome}</Text>
@@ -30,17 +34,19 @@ export const CardAgenda = ({ data }) => {
                 <Text style={Container.text}>Fim do Tratamento: {formataData(agenda.med.dataFim)}</Text>
                 <Text style={Container.text}>Horário: {agenda.med.horario}</Text>
                 <Text style={Container.text}>Qtd.: {agenda.med.tipo}</Text>
-              </View>
+              </Pressable>
             )
           case "anti":
             return (
-              <View style={calculaData(agenda.anti.dataFim) ? Container.list : Container.listWarning } key={i}>
+              <Pressable 
+                style={calculaData(agenda.anti.dataFim) ? Container.list : Container.listWarning } 
+                key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
                   <Text style={Container.textTitle}>Nome: {agenda.anti.fabricante}</Text>
                 </View>
                 <Text style={Container.text}>Troca: {formataData(agenda.anti.dataFim)}</Text>
-              </View>
+              </Pressable>
             )
         }
       })}

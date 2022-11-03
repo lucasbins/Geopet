@@ -42,9 +42,22 @@ export const Container = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: primaryColor,
     position: 'absolute',
-    left: 15,
-    top: 15,
+    bottom: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  faqButton:{
+    width:'90%',
+    marginTop: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 5,
+    elevation: 5,
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
+  textFaq:{
+    fontWeight: 'bold',
+    color: secondaryColor,
   }
 })
