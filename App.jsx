@@ -21,6 +21,7 @@ import { Faq } from './src/pages/faq';
 
 import { AuthProvider } from './src/contexts/auth';
 import { LandingPage } from './src/pages/landingPage';
+import { DetalheFaq } from './src/pages/faq/detalheFaq';
 
 const Stack = createNativeStackNavigator();
 
@@ -155,6 +156,15 @@ function App() {
           <Stack.Screen
             name='FAQ'
             component={Faq}
+            options={{
+              title: "Ajuda",
+              headerTintColor: primaryColor,
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name='DetailsFaq'
+            component={DetalheFaq}
             options={{
               title: "Ajuda",
               headerTintColor: primaryColor,

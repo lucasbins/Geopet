@@ -50,6 +50,12 @@ export const Menu = ({navigation}) => {
           >
             <Text style={styles.logout}>Ajuda</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnLogout}
+            onPress={onPressLogout}
+          >
+            <Text style={styles.logout}>Sair</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
