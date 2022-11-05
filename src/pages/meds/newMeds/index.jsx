@@ -5,7 +5,8 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  Alert
+  Alert,
+  Switch
 } from 'react-native';
 import { Calendario } from '../../../components/calendario';
 import { Button } from '../../../components/button';
@@ -26,11 +27,11 @@ export const NewMed = ({navigation,route}) => {
     dataFim: new Date().toJSON(),
     intervalo: '',
     tipo: '',
-    horario: ''
+    horario: '',
+    emTratamento: true
   })
   const [dataInicio, setDataInicio] = useState(new Date())
   const [dataFim, setDataFim] = useState(new Date())
-  const [horario, setHorario] = useState(new Date())
 
   const api = useApi();
   const auth = useContext(AuthContext)
@@ -128,16 +129,20 @@ export const NewMed = ({navigation,route}) => {
                 value={med.intervalo}
                 onChangeText={(text) => setMed({ ...med, intervalo: text })}
               />
-              <Text style={Container.label}>Horario:</Text>
+              <Text style={Container.label}>Horário:</Text>
               <TextInput
                 style={Container.input}
                 value={med.horario}
                 onChangeText={(text) => setMed({ ...med, horario: text })}
               />
-              <Text style={Container.label}>Inicio do tratamento:</Text>
+              <Text style={Container.label}>Início do tratamento:</Text>
               <Calendario data={dataInicio} setDate={handleSelectDataInicio}/>
               <Text style={Container.label}>Fim do tratamento:</Text>
               <Calendario data={dataFim} setDate={handleSelectDataFim}/>
+              <View style={Container.rowBtnSwitch}>
+                <Text style={Container.labelSwitch}>Em tratamento: </Text>
+                <Switch value={med.emTratamento} onChange={() => setMed({...med, emTratamento: !med.emTratamento})}/>
+              </View>
             </View>
             <View style={Container.rowBtn}>
             {route.params.acao === 'edit' && 

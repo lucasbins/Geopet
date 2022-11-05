@@ -65,13 +65,18 @@ export const container = StyleSheet.create({
   },
   buttonRed:{
     padding: 10,
-    backgroundColor: '#f00',
+    backgroundColor: '#8B0000',
     width: '45%',
     alignItems: 'center',
     borderRadius: 9
   },
   textButton:{
     fontSize:18,
+    color: secondaryColor
+  },
+  textButtonDel:{
+    fontSize:18,
+    color: '#fff'
   },
   rowButtons:{
     flex: 1,

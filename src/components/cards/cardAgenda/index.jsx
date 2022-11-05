@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, Pressable, Alert } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 import { Container } from './styles';
 
-export const CardAgenda = ({data}) => {
+export const CardAgenda = ({data, onPress}) => {
   const agendas = priorizaData(data)
+
+  
 
   return (
     <>
@@ -13,7 +15,8 @@ export const CardAgenda = ({data}) => {
           case "vac":
             return (
               <Pressable 
-                style={calculaData(agenda.vac.proximaVacina) ? Container.list : Container.listWarning } 
+                style={calculaData(agenda.vac.proximaVacina)}
+                onPress={()=> onPress('vac',agenda.vac, agenda.nomePet)}
                 key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
@@ -25,13 +28,14 @@ export const CardAgenda = ({data}) => {
           case "med":
             return (
               <Pressable 
-                style={calculaData(agenda.med.dataFim) ? Container.list : Container.listWarning } 
+                style={calculaData(agenda.med.dataFim)}
+                onPress={()=> onPress('med',agenda.med, agenda.nomePet)}
                 key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
-                  <Text style={Container.textTitle}>Rémedio: {agenda.med.nome}</Text>
+                  <Text style={Container.text}>Remédio: {agenda.med.nome}</Text>
                 </View>
-                <Text style={Container.text}>Fim do Tratamento: {formataData(agenda.med.dataFim)}</Text>
+                <Text style={Container.textTitle}>Fim do Tratamento: {formataData(agenda.med.dataFim)}</Text>
                 <Text style={Container.text}>Horário: {agenda.med.horario}</Text>
                 <Text style={Container.text}>Qtd.: {agenda.med.tipo}</Text>
               </Pressable>
@@ -39,13 +43,14 @@ export const CardAgenda = ({data}) => {
           case "anti":
             return (
               <Pressable 
-                style={calculaData(agenda.anti.dataFim) ? Container.list : Container.listWarning } 
+                style={calculaData(agenda.anti.dataFim)}
+                onPress={()=> onPress('anti',agenda.anti, agenda.nomePet)}
                 key={i}>
                 <View style={Container.row}>
                   <Text style={Container.text}>{agenda.nomePet}</Text>
-                  <Text style={Container.textTitle}>Nome: {agenda.anti.fabricante}</Text>
+                  <Text style={Container.text}>Nome: {agenda.anti.fabricante}</Text>
                 </View>
-                <Text style={Container.text}>Troca: {formataData(agenda.anti.dataFim)}</Text>
+                <Text style={Container.textTitle}>Troca: {formataData(agenda.anti.dataFim)}</Text>
               </Pressable>
             )
         }
@@ -67,9 +72,13 @@ const calculaData = (date) => {
   const diff = Math.abs(dataFim.getTime() - data.getTime())
 
   if(Math.ceil(diff / (1000 * 60 * 60 * 24)) > 180){
-    return true
+    return Container.list
   }else{
-    return false
+    if(dataFim < data){
+      return Container.listRed
+    }else{
+      return Container.listWarning
+    }
   }
 }
 

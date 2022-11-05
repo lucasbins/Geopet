@@ -15,7 +15,7 @@ export const CardVac = ({vac,change}) => {
           <Text style={styles.text}>{vac.nome}</Text>
           <Text style={styles.label}>Data:</Text>
           <Text style={styles.text}>{formataData(vac.data)}</Text>
-          <Text style={styles.label}>Proxima:</Text>
+          <Text style={styles.label}>Próxima:</Text>
           <Text style={styles.text}>{formataData(vac.proximaVacina)}</Text>
         </View>
         <View>

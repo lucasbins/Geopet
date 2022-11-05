@@ -5,17 +5,13 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
-  Alert
+  Alert,
+  Switch
 } from 'react-native';
 import { Calendario } from '../../../components/calendario';
-
 import { useApi } from '../../../hooks/useApi';
 import AuthContext from '../../../contexts/auth';
-
-import { Timestamp } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
-
 import { Container } from './styles';
 import { Button } from '../../../components/button';
 
@@ -28,7 +24,8 @@ export const NewAnti = ({ navigation, route }) => {
     intervalo: '',
     tipo: '',
     horario: '',
-    tipoAplicacao: ''
+    tipoAplicacao: '',
+    aplicado: false
   })
   const [dataInicio, setDataInicio] = useState(new Date())
   const [dataFim, setDataFim] = useState(new Date())
@@ -130,7 +127,7 @@ export const NewAnti = ({ navigation, route }) => {
               value={anti.intervalo}
               onChangeText={(text) => setAnti({ ...anti, intervalo: text })}
             />
-            <Text style={Container.label}>Horario:</Text>
+            <Text style={Container.label}>Horário:</Text>
             <TextInput
               style={Container.input}
               value={anti.horaAplicacao}
@@ -142,10 +139,14 @@ export const NewAnti = ({ navigation, route }) => {
               value={anti.tipoAplicacao}
               onChangeText={(text) => setAnti({ ...anti, tipoAplicacao: text })}
             />
-            <Text style={Container.label}>Inicio do tratamento:</Text>
+            <Text style={Container.label}>Início do tratamento:</Text>
             <Calendario data={dataInicio} setDate={handleSelectDataInicio} />
             <Text style={Container.label}>Fim do tratamento:</Text>
             <Calendario data={dataFim} setDate={handleSelectDataFim} />
+            <View style={Container.rowBtnSwitch}>
+              <Text style={Container.labelSwitch}>Aplicado:</Text>
+              <Switch value={anti.aplicado} onChange={() => setAnti({...anti, aplicado: !anti.aplicado})}/>
+            </View>
           </View>
           <View style={Container.rowBtn}>
             {route.params.acao === 'edit' &&

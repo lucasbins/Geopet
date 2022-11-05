@@ -5,7 +5,8 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  Alert
+  Alert,
+  Switch
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -25,7 +26,8 @@ export const NewVac = ({ navigation, route }) => {
     nome: '',
     data: new Date().toJSON(),
     proximaVacina: new Date().toJSON(),
-    rotulo: ''
+    rotulo: '',
+    aplicado: false
   })
   const [dateVac, setDateVac] = useState(new Date())
   const [nextVac, setNextVac] = useState(new Date())
@@ -129,10 +131,15 @@ export const NewVac = ({ navigation, route }) => {
             />
             <Text style={Container.label}>Data da vacina:</Text>
             <Calendario data={dateVac} setDate={handleSelectDate} />
-            <Text style={Container.label}>Data da proxima vacina:</Text>
+            <Text style={Container.label}>Data da próxima vacina:</Text>
             <Calendario data={nextVac} setDate={handleSelectNextVac} />
-            <Text style={Container.label}>Foto do Rotulo:</Text>
+            <Text style={Container.label}>Foto do Rótulo:</Text>
             <ImageButton image={vac.rotulo} pickImage={pickImage} />
+            <View style={Container.rowBtnSwitch}>
+              <Text style={Container.labelSwitch}>Vacina Aplicada:</Text>
+              <Switch value={vac.aplicado} onChange={() => setVac({ ...vac, aplicado: !vac.aplicado })} />
+            </View>
+
           </View>
           <View style={Container.rowBtn}>
             {route.params.acao === 'edit' &&

@@ -92,7 +92,7 @@ export const DetalhesPets = ({ navigation, route }) => {
                 style={container.buttonRed}
                 onPress={() => handleDelete(pet.uuid)}
               >
-                <Text style={container.textButton}>Deletar</Text>
+                <Text style={container.textButtonDel}>Deletar</Text>
               </TouchableOpacity>
               <TouchableOpacity style={container.button}
                 onPress={() => navigation.navigate('NewPets', { pet: pet, acao: 'edit' })}>

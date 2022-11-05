@@ -26,14 +26,22 @@ export const Container = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: primaryColor,
     color: secondaryColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 15
   },
   label:{
     color: primaryColor,
     fontWeight: 'bold',
-    marginTop: 15
+    marginTop: 15,
+    fontSize: 18
    },
-   saveButton: {
+  labelSwitch:{
+    color: primaryColor,
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginRight: 50
+   },
+  saveButton: {
     width: 100,
     height: 50,
     borderRadius: 10,
@@ -58,16 +66,15 @@ export const Container = StyleSheet.create({
     color: secondaryColor,
   },
   rowBtn:{
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
   },
-  deleteButton:{
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: '#f00',
-    padding: 5,
-    margin: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
+  rowBtnSwitch:{
+    marginTop: 25,
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   }
 })

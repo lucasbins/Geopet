@@ -29,7 +29,7 @@ export const Button = ({title,text, callback}) => {
           style={Container.deleteButton}
           accessibilityLabel={title} 
           onPress={callback}>
-          <Text style={Container.textBtn}>{title}</Text>
+          <Text style={Container.textBtnDel}>{title}</Text>
         </TouchableOpacity>
       )
     case "Filtrar":

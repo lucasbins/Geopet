@@ -13,7 +13,7 @@ export const CardMed = ({med, change}) => {
         <View style={styles.name}>
           <Text style={styles.label}>Nome:</Text>
           <Text style={styles.text}>{med.nome}</Text>
-          <Text style={styles.label}>Inicio do tratamento:</Text>
+          <Text style={styles.label}>Início do tratamento:</Text>
           <Text style={styles.text}>{formataData(med.dataInicio)}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>
           <Text style={styles.text}>{formataData(med.dataFim)}</Text>

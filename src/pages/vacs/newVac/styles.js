@@ -26,17 +26,32 @@ export const Container = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: primaryColor,
     color: secondaryColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 15
   },
   label:{
     color: primaryColor,
     fontWeight: 'bold',
-    marginTop: 15
+    marginTop: 15,
+    fontSize: 18
    },  
   rowBtn:{
-    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 25
   },
-  
+  rowBtnSwitch:{
+    marginTop: 25,
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  labelSwitch:{
+    color: primaryColor,
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginRight: 50
+  }
 })

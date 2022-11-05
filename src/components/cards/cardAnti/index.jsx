@@ -14,7 +14,7 @@ export const CardAnti = ({anti, change}) => {
           <Text style={styles.text}>{anti.fabricante}</Text>
           <Text style={styles.label}>Tipo:</Text>
           <Text style={styles.text}>{anti.tipo}</Text>
-          <Text style={styles.label}>Inicio do tratamento:</Text>
+          <Text style={styles.label}>Início do tratamento:</Text>
           <Text style={styles.text}>{formataData(anti.dataInicio)}</Text>
           <Text style={styles.label}>Fim do tratamento:</Text>
           <Text style={styles.text}>{formataData(anti.dataFim)}</Text>

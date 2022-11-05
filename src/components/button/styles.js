@@ -26,11 +26,15 @@ export const Container = StyleSheet.create({
     width: 100,
     height: 50,
     borderRadius: 10,
-    backgroundColor: '#f00',
+    backgroundColor: '#8B0000',
     padding: 5,
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textBtnDel: {
+    fontSize: 18,
+    color: '#ccc',
   },
   textBtn: {
     fontSize: 18,

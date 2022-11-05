@@ -9,6 +9,7 @@ export const Container = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: primaryColor,
     color: secondaryColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 15
   }
 })

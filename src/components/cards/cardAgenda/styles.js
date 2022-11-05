@@ -9,6 +9,13 @@ export const Container = StyleSheet.create({
     borderBottomEndRadius: 10,
     backgroundColor: "#ff5c00"
   },
+  listRed: {
+    margin: 8,
+    padding: 10,
+    borderTopLeftRadius: 10,
+    borderBottomEndRadius: 10,
+    backgroundColor: "#8B0000"
+  },
   list: {
     margin: 8,
     padding: 10,
