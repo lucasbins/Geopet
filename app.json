@@ -2,14 +2,17 @@
   "displayName": "GeoPet",
   "expo": {
     "name": "GeoPet",
-    "description" : "Cuidando de seu pet",
+    "description": "Cuidando de seu pet",
     "slug": "geopet",
-    "version": "0.1.0",
-    "icon" : "src/assets/img/icon.png",
-    "owner" : "lucasbins",
+    "version": "1.0.0",
+    "icon": "src/assets/img/icon.png",
+    "owner": "lucasbins",
     "sdkVersion": "45.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.lucasbins.geopet"
+    }
   }
 }

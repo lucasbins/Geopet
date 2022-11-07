@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
 import { Marker, Circle } from 'react-native-maps';
-import { View , Text, Image} from 'react-native';
+import { View , Text, Image, Alert} from 'react-native';
 import * as Location from 'expo-location';
 import { registerRootComponent } from 'expo';
 import { styles } from './styles';
@@ -21,17 +21,17 @@ export function Maps() {
     type: 'veterinary_care'
   })
 
-  const searchVet = async (location, param) => {
+  const searchVet = (location, param) => {
     const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=${param.radius}&type=${param.type}&key=${API_KEY}`
-    await fetch(url, { method: 'GET' })
+    fetch(url, { method: 'GET' })
       .then((resp) => resp.json())
       .then(function (data) {
-        console.log('Localizou');
-        setMarkers(data.results)
+        if(data.status != 'OK'){
+          Alert.alert("Erro", data.status)
+        }else{
+          setMarkers(data.results)
+        }
       })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   const mapRef = useRef();
