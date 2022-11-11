@@ -27,12 +27,12 @@ export const LandingPage = ({ navigation }) => {
           if (pet)
             auth.setPets(pet)
         })
-        setTimeout(()=> {navigation.navigate('Menu')}, 1000)   
+        navigation.navigate('Menu')   
       }else{
-        setTimeout(()=> {navigation.navigate('Login')}, 1000)
+       navigation.navigate('Login')
       }
     }).catch((error) => {
-      setTimeout(()=> {navigation.navigate('Login')}, 1000)
+      navigation.navigate('Login')
       console.log(error)
     })
   }

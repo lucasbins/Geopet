@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: "center",
+    justifyContent: 'center'
   },
   background: {
     flex:1,
@@ -21,5 +22,11 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
     width: 30,
     height: 43,
+  },
+  loading:{
+    color: '#fff',
+    fontWeight: 'bold',
+    alignItems: "center",
+    justifyContent: 'center'
   }
 });

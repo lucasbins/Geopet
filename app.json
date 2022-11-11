@@ -13,6 +13,9 @@
     ],
     "android": {
       "package": "com.lucasbins.geopet"
+    },
+    "splash": {
+      "image" : "./src/assets/img/splashScreen.png"
     }
   }
 }

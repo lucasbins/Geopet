@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
-import { Marker, Circle } from 'react-native-maps';
-import { View , Text, Image, Alert} from 'react-native';
+import { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
+import { View, Text, Image, Alert } from 'react-native';
 import * as Location from 'expo-location';
 import { registerRootComponent } from 'expo';
 import { styles } from './styles';
@@ -11,12 +11,13 @@ import { API_KEY } from '../../config/firebaseconfig'
 import { FilterModal } from '../../components/filterModal';
 
 
+
 export function Maps() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [markers, setMarkers] = useState(null);
-  const [ modalVisible, setModalVisible] = useState(false);
-  const [ params, setParams ] = useState({
+  const [modalVisible, setModalVisible] = useState(false);
+  const [params, setParams] = useState({
     radius: 2000,
     type: 'veterinary_care'
   })
@@ -26,9 +27,9 @@ export function Maps() {
     fetch(url, { method: 'GET' })
       .then((resp) => resp.json())
       .then(function (data) {
-        if(data.status != 'OK'){
+        if (data.status != 'OK') {
           Alert.alert("Erro", data.status)
-        }else{
+        } else {
           setMarkers(data.results)
         }
       })
@@ -52,10 +53,10 @@ export function Maps() {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       searchVet(location.coords, params);
-    })();    
+    })();
   }, []);
 
-  let text = 'Waiting..';
+  let text = 'Carregando';
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
@@ -63,8 +64,8 @@ export function Maps() {
   }
 
   const showOpen = (isOpen) => {
-    if(isOpen)
-      return isOpen.open_now ? 'Aberto' : 'Fechado' 
+    if (isOpen)
+      return isOpen.open_now ? 'Aberto' : 'Fechado'
   }
 
   const handleFilter = async (newParams) => {
@@ -76,7 +77,7 @@ export function Maps() {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
-        {location != null && <MapView style={styles.map}
+        {location != null ? <MapView style={styles.map}
           region={
             {
               latitude: location.coords.latitude,
@@ -84,6 +85,7 @@ export function Maps() {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421
             }}
+          provider={PROVIDER_GOOGLE}
           loadingEnabled={true}
           ref={mapRef}
           showsUserLocation={true}
@@ -103,14 +105,16 @@ export function Maps() {
               >
                 <View>
                   <Image style={styles.pin}
-                  source={require('../../assets/icons/pin.png')}/>
+                    source={require('../../assets/icons/pin.png')} />
                 </View>
               </Marker>
             )
           })}
-        </MapView>}
-        <Button title={"Filtrar"} callback={() => setModalVisible(!modalVisible)}/>
-        <FilterModal modalVisible={modalVisible} setModalVisible={handleFilter}/>
+        </MapView> :
+        <Text style={styles.loading}>{text}</Text>
+        }
+        <Button title={"Filtrar"} callback={() => setModalVisible(!modalVisible)} />
+        <FilterModal modalVisible={modalVisible} setModalVisible={handleFilter} />
       </View>
     </View>
 
