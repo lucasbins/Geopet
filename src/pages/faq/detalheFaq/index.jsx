@@ -86,7 +86,7 @@ export const DetalheFaq = ({ route }) => {
         <SafeAreaView >
           <ScrollView >
             <View style={Container.background}>
-              <Text style={Container.title}>Como adicionar uma vacina!</Text>
+              <Text style={Container.title}>Como adicionar vacina, medicamento ou antiparasitário</Text>
               <Text style={Container.text}>
                 1 - Ao ir para tela de detalhes do Pet.
               </Text>
@@ -135,7 +135,7 @@ export const DetalheFaq = ({ route }) => {
         <SafeAreaView >
           <ScrollView >
             <View style={Container.background}>
-              <Text style={Container.title}>Como adicionar uma vacina!</Text>
+              <Text style={Container.title}>Como remover vacina, medicamento ou antiparasitário!</Text>
               <Text style={Container.text}>
                 1 - Ao ir para tela de detalhes do Pet.
               </Text>
@@ -152,7 +152,7 @@ export const DetalheFaq = ({ route }) => {
                 style={Container.imageL}
                 source={{ uri: 'https://cdn.discordapp.com/attachments/897996889495076938/1037858822955475025/image.png' }} />
               <Text style={Container.text}>
-                3 - Precione a vacina que deseja apagar.
+                3 - Precione a vacina que deseja remover.
               </Text>
               <Text style={Container.text}>
                 4 - Você ira redirecionado para tela de edição de vacina.

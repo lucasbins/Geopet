@@ -16,7 +16,9 @@ export const Container = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    elevation: 5
+    elevation: 5,
+    width: '90%',
+    textAlign: 'center'
   },
   text: {
     color: secondaryColor,

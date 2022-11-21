@@ -20,7 +20,6 @@ import { Agenda } from './src/pages/agenda';
 import { Faq } from './src/pages/faq';
 
 import { AuthProvider } from './src/contexts/auth';
-import { LandingPage } from './src/pages/landingPage';
 import { DetalheFaq } from './src/pages/faq/detalheFaq';
 
 const Stack = createNativeStackNavigator();
@@ -29,12 +28,7 @@ function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'LandingPage'}>
-        <Stack.Screen
-            name='LandingPage'
-            component={LandingPage}
-            options={{ headerShown: false }}
-          />
+        <Stack.Navigator initialRouteName={'Login'}>
           <Stack.Screen
             name='Login'
             component={Login}
@@ -130,7 +124,7 @@ function App() {
             name='Anti'
             component={Anti}
             options={{
-              title: "Antiparasitario",
+              title: "Antiparasitário",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}

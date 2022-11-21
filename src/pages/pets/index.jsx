@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import AuthContext from '../../contexts/auth';
 
 import { styles } from './style';
@@ -7,7 +7,7 @@ import { styles } from './style';
 import CardPet from '../../components/cards/cardPet';
 import PlusButton from '../../components/plusButton';
 
-export const Pets = ({navigation}) => {
+export const Pets = ({ navigation }) => {
   const [pets, setPets] = useState([])
   const auth = useContext(AuthContext)
 
@@ -16,7 +16,7 @@ export const Pets = ({navigation}) => {
   }, [auth.pets])
 
   const onPressNewPets = () => {
-    navigation.navigate('NewPets', {acao: 'new'})
+    navigation.navigate('NewPets', { acao: 'new' })
   }
 
   const onPressDetailsPets = (pet) => {
@@ -25,14 +25,19 @@ export const Pets = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View>
-        {pets !== undefined && pets.map((pet,i) => {
-          return <CardPet pet={pet} key={i} change={onPressDetailsPets}/>
-        })}
+      {pets.length > 0 ?
+        <ScrollView >
+          {pets.map((pet, i) => {
+            return <CardPet pet={pet} key={i} change={() => onPressDetailsPets(pet)} />
+          })}
+        </ScrollView>
+        :
+        <View style={styles.list}>
+          <Text style={styles.title}>Sem pets</Text>
+          <Text style={styles.info}>Para inserir precione '+' no canto da tela.</Text>
         </View>
-      </ScrollView>
-      <PlusButton change={onPressNewPets}/>
+      }
+      <PlusButton change={onPressNewPets} />
     </SafeAreaView>
   );
 }

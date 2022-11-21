@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 
 import { styles } from './styles';
 
@@ -9,7 +9,7 @@ import { CardAnti } from '../../components/cards/cardAnti';
 
 export const Anti = ({ navigation, route }) => {
   const pet = route.params.pet;
-  const anti = route.params.pet.antiparasitario;
+  const antis = route.params.pet.antiparasitario;
 
   const onPressNewAnti = () => {
     navigation.navigate('NewAnti', { pet: pet, acao: 'new' })
@@ -21,14 +21,19 @@ export const Anti = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.list}>
-          {anti.length > 0 && anti.map((anti, i) => {
-            return <CardAnti anti={anti} key={i} change={() => onPressDetailsAnti(anti)} />
-          })}
-        </View>
+    {antis.length > 0 ?
+      <ScrollView >
+        {antis.map((anti, i) => {
+          return <CardAnti anti={anti} key={i} change={() => onPressDetailsAnti(anti)} />
+        })}
       </ScrollView>
-      <PlusButton change={onPressNewAnti} />
-    </SafeAreaView>
+      :
+      <View style={styles.list}>
+        <Text style={styles.title}>Sem antiparasitário</Text>
+        <Text style={styles.info}>Para inserir precione '+' no canto da tela.</Text>
+      </View>
+    }
+    <PlusButton change={onPressNewAnti} />
+  </SafeAreaView>
   );
 }

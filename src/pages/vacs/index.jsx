@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 
 import { styles } from './style';
 
@@ -20,13 +20,18 @@ export const Vacs = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.list}>
-          {vacs.length > 0 && vacs.map((vac, i) => {
+      {vacs.length > 0 ?
+        <ScrollView >
+          {vacs.map((vac, i) => {
             return <CardVac vac={vac} key={i} change={() => onPressDetailsVacs(vac)} />
           })}
+        </ScrollView>
+        :
+        <View style={styles.list}>
+          <Text style={styles.title}>Sem vacinas</Text>
+          <Text style={styles.info}>Para inserir precione '+' no canto da tela.</Text>
         </View>
-      </ScrollView>
+      }
       <PlusButton change={onPressNewVacs} />
     </SafeAreaView>
   );

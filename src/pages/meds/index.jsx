@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, ScrollView } from 'react-native';
+import { View, SafeAreaView, ScrollView, Text } from 'react-native';
 
 import { styles } from './style';
 
@@ -20,13 +20,18 @@ export const Meds = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.list}>
-          {meds.length > 0 && meds.map((med, i) => {
+      {meds.length > 0 ?
+        <ScrollView >
+          {meds.map((med, i) => {
             return <CardMed med={med} key={i} change={() => onPressDetailsMeds(med)} />
           })}
+        </ScrollView>
+        :
+        <View style={styles.list}>
+          <Text style={styles.title}>Sem medicamentos</Text>
+          <Text style={styles.info}>Para inserir precione '+' no canto da tela.</Text>
         </View>
-      </ScrollView>
+      }
       <PlusButton change={onPressNewMeds} />
     </SafeAreaView>
   );

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import AuthContext from '../../contexts/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -28,6 +29,32 @@ export const Login = ({ navigation }) => {
     } catch (error) {
       setError(true)
     }
+  }
+
+  useEffect(() => {
+    try {
+      fetchUser()
+    } catch (e){
+      console.log(e)
+    }
+  },[auth.user])
+
+  const fetchUser = async () => {
+    await AsyncStorage.getItem("USER").then((USER) => {
+      const user = JSON.parse(USER)
+      if (user != null) {
+        auth.setUser(user.uid)
+        AsyncStorage.getItem("PETS").then((pets) => {
+          const pet = JSON.parse(pets)
+          if (pet)
+            auth.setPets(pet)
+        })
+        navigation.navigate('Menu')   
+      }
+    }).catch((error) => {
+      navigation.navigate('Login')
+      console.log(error)
+    })
   }
 
   const handleRecovery = async () => {
