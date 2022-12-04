@@ -29,7 +29,7 @@ export const Menu = ({navigation}) => {
 
   const onPressLogout = () => {
     auth.logout()
-    navigation.navigate('LandingPage')
+    navigation.navigate('Login')
   }
 
   return (
@@ -41,7 +41,7 @@ export const Menu = ({navigation}) => {
       </View>
       <View style={styles.container}>
         <View style={styles.rowButtons}>
-          <ButtonMenu icon={"map"} onPress={onPressMaps} title={'Localizar clínicas'} />
+          <ButtonMenu icon={"map"} onPress={onPressMaps} title={'Localizador'} />
           <ButtonMenu icon={"pet"} onPress={onPressPets} title={'Meus Pets'}/>
           <ButtonMenu icon={"agenda"} onPress={onPressAgenda} title={'Agenda'}/>
           <TouchableOpacity

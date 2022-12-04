@@ -79,7 +79,7 @@ function App() {
             name='Maps'
             component={Maps}
             options={{
-              title: "Localizar clínicas",
+              title: "Localizador",
               headerTintColor: primaryColor,
               headerTitleAlign: "center",
             }}

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: "contain",
-    width: 200,
+    width: 300,
     height: 200,
   },
   line: {
@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: primaryColor,
+    borderRadius: 10,
+    marginTop: 30
+  },
+  disableButton: {
+    width: 300,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: secondaryColor,
     borderRadius: 10,
     marginTop: 30
   },
