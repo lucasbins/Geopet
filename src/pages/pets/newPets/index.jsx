@@ -68,7 +68,7 @@ export const NewPets = ({ navigation, route }) => {
   };
 
   const handleCancel = () => {
-    navigation.navigate('Pets')
+    navigation.navigate('Menu')
   }
 
   const handleSavePet = () => {

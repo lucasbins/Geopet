@@ -44,7 +44,7 @@ export const NewAnti = ({ navigation, route }) => {
   }, [])
 
   const handleCancel = () => {
-    navigation.navigate('Anti', { pet: route.params.pet })
+    navigation.navigate('Menu')
   }
 
   const handleSelectDataInicio = (date) => {

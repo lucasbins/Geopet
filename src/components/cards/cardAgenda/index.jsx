@@ -6,8 +6,6 @@ import { Container } from './styles';
 export const CardAgenda = ({data, onPress}) => {
   const agendas = priorizaData(data)
 
-  
-
   return (
     <>
       {agendas.map((agenda, i) => {
@@ -71,7 +69,7 @@ const calculaData = (date) => {
   const data = new Date()
   const diff = Math.abs(dataFim.getTime() - data.getTime())
 
-  if(Math.ceil(diff / (1000 * 60 * 60 * 24)) > 180){
+  if(Math.ceil(diff / (1000 * 60 * 60 * 24)) > 90){
     return Container.list
   }else{
     if(dataFim < data){

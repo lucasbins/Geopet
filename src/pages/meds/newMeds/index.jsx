@@ -47,7 +47,7 @@ export const NewMed = ({navigation,route}) => {
   },[])
 
   const handleCancel = () =>{
-    navigation.navigate('Meds', {pet: route.params.pet})
+    navigation.navigate('Menu')
   }
 
   const handleSelectDataInicio = (date) => {

@@ -46,7 +46,7 @@ export const NewVac = ({ navigation, route }) => {
   }, [])
 
   const handleCancel = () => {
-    navigation.navigate('Vacs', { pet: route.params.pet })
+    navigation.navigate('Menu')
   }
 
   const handleSelectDate = (date) => {
@@ -135,10 +135,6 @@ export const NewVac = ({ navigation, route }) => {
             <Calendario data={nextVac} setDate={handleSelectNextVac} />
             <Text style={Container.label}>Foto do Rótulo:</Text>
             <ImageButton image={vac.rotulo} pickImage={pickImage} />
-            <View style={Container.rowBtnSwitch}>
-              <Text style={Container.labelSwitch}>Vacina Aplicada:</Text>
-              <Switch value={vac.aplicado} onChange={() => setVac({ ...vac, aplicado: !vac.aplicado })} />
-            </View>
 
           </View>
           <View style={Container.rowBtn}>
