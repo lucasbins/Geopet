@@ -28,9 +28,10 @@ export const DetalhesPets = ({ navigation, route }) => {
       {
         text: "Sim",
         onPress: () => {
-          api.deletePet(uuid)
-          auth.getPets(auth.user)
-          navigation.navigate("Pets", { atualizou: true })
+          api.deletePet(uuid).then(() => {
+            auth.getPets(auth.user)
+          })
+          navigation.navigate("Pets")
         }
       }]
     );
